@@ -15,6 +15,8 @@ export const users = pgTable("users", {
   postcode: text("postcode").notNull(),
   country: text("country").notNull().default('Australia'),
   phoneNumber: text("phone_number"),
+  isLocked: text("is_locked").default('false').notNull(),
+  lockedAt: timestamp("locked_at"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -27,6 +29,8 @@ export const accounts = pgTable("accounts", {
   balance: decimal("balance", { precision: 15, scale: 2 }).notNull().default('0'),
   currency: text("currency").notNull().default('AUD'),
   bsb: text("bsb").notNull(),
+  isBlocked: text("is_blocked").default('false').notNull(),
+  blockedAt: timestamp("blocked_at"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -41,6 +45,14 @@ export const transactions = pgTable("transactions", {
   balanceAfter: decimal("balance_after", { precision: 15, scale: 2 }).notNull(),
   transactionDate: timestamp("transaction_date").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  isOnHold: text("is_on_hold").default('false').notNull(),
+  holdReason: text("hold_reason"),
+  senderName: text("sender_name"),
+  senderAccountNumber: text("sender_account_number"),
+  receiverName: text("receiver_name"),
+  receiverAccountNumber: text("receiver_account_number"),
+  amountUsd: decimal("amount_usd", { precision: 15, scale: 2 }),
+  exchangeRate: decimal("exchange_rate", { precision: 10, scale: 6 }),
 });
 
 export const debitCards = pgTable("debit_cards", {
