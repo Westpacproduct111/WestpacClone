@@ -32,6 +32,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       console.log("User authenticated:", user.id);
+      
+      // Regenerate session to ensure fresh session after login
+      await new Promise<void>((resolve, reject) => {
+        req.session.regenerate((err) => {
+          if (err) reject(err);
+          else resolve();
+        });
+      });
+      
       req.session.userId = user.id;
       
       await new Promise<void>((resolve, reject) => {

@@ -24,7 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 
 const PgStore = connectPgSimple(session);
 
-app.use(session({
+// Environment-aware cookie settings
+const isProduction = process.env.NODE_ENV === 'production';
+const sessionConfig = {
   store: new PgStore({
     pool,
     tableName: 'session',
@@ -32,16 +34,18 @@ app.use(session({
   }),
   secret: process.env.SESSION_SECRET || 'westpac-banking-secret-key-change-in-production',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   proxy: true,
   cookie: {
-    secure: true,
+    secure: isProduction,
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    sameSite: 'none',
+    sameSite: isProduction ? 'none' as const : 'lax' as const,
     path: '/'
   }
-}));
+};
+
+app.use(session(sessionConfig));
 
 app.use((req, res, next) => {
   const start = Date.now();
