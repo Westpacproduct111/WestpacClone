@@ -831,28 +831,8 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-white" data-testid="footer-main">
-        {/* Indigenous Hub Banner */}
-        <div className="relative w-full">
-          <img 
-            src="https://www.westpac.com.au/content/dam/public/wbc/images/home/exp/wbc_hp_indigenous_hub_max_1920x370.webp"
-            alt="Indigenous Hub" 
-            className="w-full h-auto" 
-            data-testid="img-indigenous-hub"
-          />
-          <div className="absolute inset-0 flex items-center justify-center px-4">
-            <div className="bg-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto">
-              <p className="text-sm text-foreground leading-relaxed" data-testid="text-acknowledgment">
-                Westpac acknowledges the Traditional Owners as the custodians of this land, recognising their connection to land, waters and community. We pay our respects to Australia's First Peoples, and to their Elders past and present. View our{" "}
-                <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-indigenous-hub">
-                  Indigenous Hub
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Footer Links */}
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-border">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
               <nav className="space-y-2">
@@ -955,6 +935,26 @@ export default function Home() {
               <a href="#" className="text-[#DA1710] hover:underline">Terms and Conditions</a>, before deciding.{" "}
               <a href="#" className="text-[#DA1710] hover:underline">Target Market Determinations</a> for the products are available. Unless otherwise specified, the products and services described on this website are available only in Australia from © Westpac Banking Corporation ABN 33 007 457 141 AFSL and Australian credit licence 233714.
             </p>
+          </div>
+        </div>
+
+        {/* Indigenous Hub Banner */}
+        <div className="relative w-full">
+          <img 
+            src="https://www.westpac.com.au/content/dam/public/wbc/images/home/exp/wbc_hp_indigenous_hub_max_1920x370.webp"
+            alt="Indigenous Hub" 
+            className="w-full h-auto" 
+            data-testid="img-indigenous-hub"
+          />
+          <div className="absolute inset-0 flex items-center justify-center px-4">
+            <div className="bg-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto">
+              <p className="text-sm text-foreground leading-relaxed" data-testid="text-acknowledgment">
+                Westpac acknowledges the Traditional Owners as the custodians of this land, recognising their connection to land, waters and community. We pay our respects to Australia's First Peoples, and to their Elders past and present. View our{" "}
+                <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-indigenous-hub">
+                  Indigenous Hub
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </footer>
