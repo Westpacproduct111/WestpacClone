@@ -18,7 +18,7 @@ async function seed() {
     const hashedPassword = await hashPassword("RyanJames15102003");
     
     const [user] = await db.insert(users).values({
-      customerId: "12345678",
+      customerId: "WB29487156",
       email: "cjatsspeedwaay@gmail.com",
       password: hashedPassword,
       fullName: "Kelly Ann James",
@@ -263,7 +263,7 @@ async function seed() {
 
     console.log("\n🎉 Database seeding completed successfully!");
     console.log("\n📊 Summary:");
-    console.log("   Customer ID: 12345678");
+    console.log("   Customer ID: WB29487156");
     console.log("   Email: cjatsspeedwaay@gmail.com");
     console.log("   Password: RyanJames15102003");
     console.log("   Checking Account (BSB: 034-089): 368274 - $720,000.00 AUD");
