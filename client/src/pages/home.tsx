@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ChevronRight, MapPin, Globe, MessageSquare, HeartHandshake, Menu, Search, ChevronDown, Home as HomeIcon, CreditCard, PiggyBank } from "lucide-react";
 import { useState } from "react";
-import logoImage from "@assets/generated_images/Westpac_red_logo_wordmark_b8bae024.png";
+import logoImage from "@assets/generated_images/Westpac_red_W_logo_4eaff681.png";
 import heroImage from "@assets/generated_images/Banking_security_key_lock_b3e49ef1.png";
 import investPropertyImage from "@assets/generated_images/Investment_property_house_exterior_917d55c2.png";
 import rentalYieldImage from "@assets/generated_images/Financial_calculation_rental_yield_e2a56491.png";
@@ -40,35 +40,13 @@ export default function Home() {
       </div>
 
       {/* Main Header */}
-      <header className="bg-white border-b border-border sticky top-0 z-50 shadow-sm" data-testid="header-main">
+      <header className="bg-white sticky top-0 z-50" data-testid="header-main">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <img src={logoImage} alt="Westpac" className="h-6 lg:h-8" data-testid="img-logo" />
+              <img src={logoImage} alt="Westpac" className="h-10 lg:h-12" data-testid="img-logo" />
             </div>
-
-            {/* Main Navigation - Desktop */}
-            <nav className="hidden lg:flex items-center gap-6 text-sm font-medium flex-1 ml-12" data-testid="nav-main">
-              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-home">
-                Home
-              </a>
-              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-personal">
-                Personal
-              </a>
-              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-business">
-                Business
-              </a>
-              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-corporate">
-                Corporate
-              </a>
-              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-about">
-                About us
-              </a>
-              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-help">
-                Help
-              </a>
-            </nav>
 
             {/* Right Side Actions */}
             <div className="flex items-center gap-3">
@@ -109,6 +87,52 @@ export default function Home() {
               </Button>
             </div>
           </div>
+
+          {/* Main Navigation Tabs - Full Width */}
+          <nav className="hidden lg:flex items-center gap-12 border-b border-border" data-testid="nav-main">
+            <a 
+              href="#" 
+              className="text-foreground text-lg font-normal py-4 border-b-4 border-[#DA1710]" 
+              data-testid="link-nav-home"
+            >
+              Home
+            </a>
+            <a 
+              href="#" 
+              className="text-foreground text-lg font-normal py-4 border-b-4 border-transparent hover:border-[#DA1710]" 
+              data-testid="link-nav-personal"
+            >
+              Personal
+            </a>
+            <a 
+              href="#" 
+              className="text-foreground text-lg font-normal py-4 border-b-4 border-transparent hover:border-[#DA1710]" 
+              data-testid="link-nav-business"
+            >
+              Business
+            </a>
+            <a 
+              href="#" 
+              className="text-foreground text-lg font-normal py-4 border-b-4 border-transparent hover:border-[#DA1710]" 
+              data-testid="link-nav-corporate"
+            >
+              Corporate
+            </a>
+            <a 
+              href="#" 
+              className="text-foreground text-lg font-normal py-4 border-b-4 border-transparent hover:border-[#DA1710]" 
+              data-testid="link-nav-about"
+            >
+              About us
+            </a>
+            <a 
+              href="#" 
+              className="text-foreground text-lg font-normal py-4 border-b-4 border-transparent hover:border-[#DA1710]" 
+              data-testid="link-nav-help"
+            >
+              Help
+            </a>
+          </nav>
 
           {/* Mobile Navigation Menu */}
           {mobileMenuOpen && (
