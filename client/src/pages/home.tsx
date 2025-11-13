@@ -535,6 +535,112 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Start the property investment conversation with confidence */}
+      <section className="bg-muted/30 py-16 lg:py-20" data-testid="section-property-investment">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-2 text-foreground" data-testid="text-property-investment-title">
+              Start the property investment conversation
+            </h2>
+            <p className="text-2xl lg:text-3xl text-[#DA1710] font-bold" data-testid="text-property-investment-subtitle">
+              with confidence
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {/* Article 1 */}
+            <Card className="overflow-hidden hover-elevate" data-testid="card-investment-1">
+              <a href="#" className="block" data-testid="link-investment-1">
+                <img 
+                  src={investPropertyImage} 
+                  alt="Investment property strategies" 
+                  className="w-full h-48 object-cover" 
+                  data-testid="img-investment-1"
+                />
+                <div className="p-5">
+                  <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-investment-1-title">
+                    Investment property strategies
+                  </h3>
+                  <p className="text-muted-foreground text-sm" data-testid="text-investment-1-description">
+                    Tips that could help you make the most of potential profits.
+                  </p>
+                </div>
+              </a>
+            </Card>
+
+            {/* Article 2 */}
+            <Card className="overflow-hidden hover-elevate" data-testid="card-investment-2">
+              <a href="#" className="block" data-testid="link-investment-2">
+                <img 
+                  src={rentalYieldImage} 
+                  alt="Calculating rental yield" 
+                  className="w-full h-48 object-cover" 
+                  data-testid="img-investment-2"
+                />
+                <div className="p-5">
+                  <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-investment-2-title">
+                    Calculating rental yield
+                  </h3>
+                  <p className="text-muted-foreground text-sm" data-testid="text-investment-2-description">
+                    Learn if a property is worth investing in and how much you could earn.
+                  </p>
+                </div>
+              </a>
+            </Card>
+
+            {/* Article 3 */}
+            <Card className="overflow-hidden hover-elevate" data-testid="card-investment-3">
+              <a href="#" className="block" data-testid="link-investment-3">
+                <img 
+                  src={homeEquityImage} 
+                  alt="Home equity for investment" 
+                  className="w-full h-48 object-cover" 
+                  data-testid="img-investment-3"
+                />
+                <div className="p-5">
+                  <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-investment-3-title">
+                    Home equity for investment
+                  </h3>
+                  <p className="text-muted-foreground text-sm" data-testid="text-investment-3-description">
+                    Explore how to use your home's equity to buy an investment property.
+                  </p>
+                </div>
+              </a>
+            </Card>
+
+            {/* Article 4 */}
+            <Card className="overflow-hidden hover-elevate" data-testid="card-investment-4">
+              <a href="#" className="block" data-testid="link-investment-4">
+                <img 
+                  src={propertyCostsImage} 
+                  alt="Investment property costs" 
+                  className="w-full h-48 object-cover" 
+                  data-testid="img-investment-4"
+                />
+                <div className="p-5">
+                  <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-investment-4-title">
+                    Investment property costs
+                  </h3>
+                  <p className="text-muted-foreground text-sm" data-testid="text-investment-4-description">
+                    Get a clear view of the fees and expenses involved in property investment.
+                  </p>
+                </div>
+              </a>
+            </Card>
+          </div>
+
+          <div className="text-center">
+            <Button 
+              variant="outline" 
+              className="font-semibold border-2" 
+              data-testid="button-investment-journey"
+            >
+              Start your investment journey
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content Area */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid lg:grid-cols-4 gap-8">
@@ -598,7 +704,7 @@ export default function Home() {
                         Investment property strategies
                       </h3>
                       <p className="text-muted-foreground text-sm" data-testid="text-article-1-description">
-                        Tips that could help you make the most of potential profits.
+                        Tips to invest smarter.
                       </p>
                     </div>
                   </a>
@@ -619,46 +725,6 @@ export default function Home() {
                       </h3>
                       <p className="text-muted-foreground text-sm" data-testid="text-article-2-description">
                         Learn if a property is worth investing in and how much you could earn.
-                      </p>
-                    </div>
-                  </a>
-                </Card>
-
-                {/* Article 3 */}
-                <Card className="overflow-hidden hover-elevate" data-testid="card-article-3">
-                  <a href="#" className="block" data-testid="link-article-3">
-                    <img 
-                      src={homeEquityImage} 
-                      alt="Home equity for investment" 
-                      className="w-full h-48 object-cover" 
-                      data-testid="img-article-3"
-                    />
-                    <div className="p-5">
-                      <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-3-title">
-                        Home equity for investment
-                      </h3>
-                      <p className="text-muted-foreground text-sm" data-testid="text-article-3-description">
-                        Explore how to use your home's equity to buy an investment property.
-                      </p>
-                    </div>
-                  </a>
-                </Card>
-
-                {/* Article 4 */}
-                <Card className="overflow-hidden hover-elevate" data-testid="card-article-4">
-                  <a href="#" className="block" data-testid="link-article-4">
-                    <img 
-                      src={propertyCostsImage} 
-                      alt="Investment property costs" 
-                      className="w-full h-48 object-cover" 
-                      data-testid="img-article-4"
-                    />
-                    <div className="p-5">
-                      <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-4-title">
-                        Investment property costs
-                      </h3>
-                      <p className="text-muted-foreground text-sm" data-testid="text-article-4-description">
-                        Get a clear view of the fees and expenses involved in property investment.
                       </p>
                     </div>
                   </a>
