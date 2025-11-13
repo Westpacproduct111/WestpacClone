@@ -806,15 +806,33 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
               <nav className="space-y-2">
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-complaints">
+                <a 
+                  href="https://www.westpac.com.au/contact-us/complaints-compliments" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-complaints"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Complaints and compliments
                 </a>
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-contact">
+                <a 
+                  href="https://www.westpac.com.au/contact-us" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-contact"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Contact us
                 </a>
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-careers">
+                <a 
+                  href="https://www.westpac.com.au/about-westpac/careers" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-careers"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Careers
                 </a>
@@ -822,15 +840,33 @@ export default function Home() {
             </div>
             <div>
               <nav className="space-y-2">
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-access">
+                <a 
+                  href="https://www.westpac.com.au/web-accessibility" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-access"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Access and Inclusion
                 </a>
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-investor">
+                <a 
+                  href="https://www.westpac.com.au/about-westpac/investor-centre" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-investor"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Investor centre
                 </a>
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-westpac-group">
+                <a 
+                  href="https://www.westpac.com.au/about-westpac/westpac-group" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-westpac-group"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Westpac Group
                 </a>
@@ -838,15 +874,33 @@ export default function Home() {
             </div>
             <div>
               <nav className="space-y-2">
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-security">
+                <a 
+                  href="https://www.westpac.com.au/security" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-security"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Security
                 </a>
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-faqs">
+                <a 
+                  href="https://www.westpac.com.au/faq" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-faqs"
+                >
                   <ChevronRight className="h-3 w-3" />
                   FAQs
                 </a>
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-privacy">
+                <a 
+                  href="https://www.westpac.com.au/privacy" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-privacy"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Privacy
                 </a>
@@ -854,19 +908,43 @@ export default function Home() {
             </div>
             <div>
               <nav className="space-y-2">
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-website-terms">
+                <a 
+                  href="https://www.westpac.com.au/terms-and-conditions" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-website-terms"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Website terms and conditions
                 </a>
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-terms">
+                <a 
+                  href="https://www.westpac.com.au/terms-conditions" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-terms"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Terms and conditions
                 </a>
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-site-index">
+                <a 
+                  href="https://www.westpac.com.au/sitemap" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-site-index"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Site index
                 </a>
-                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-slavery">
+                <a 
+                  href="https://www.westpac.com.au/content/dam/public/wbc/documents/pdf/aw/sustainability/wbc-2024-modern-slavery-statement.pdf" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" 
+                  data-testid="link-slavery"
+                >
                   <ChevronRight className="h-3 w-3" />
                   Modern Slavery Statement
                 </a>
