@@ -374,7 +374,7 @@ export default function Home() {
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-eftpos">
+                      <a href="https://www.westpac.com.au/business-banking/merchants-and-payments/?fid=HP:product:bus:subhead:wbc:www:bus:merchants-and-payments" className="text-sm text-foreground hover:underline" data-testid="link-eftpos">
                         EFTPOS & eCommerce
                       </a>
                     </li>
