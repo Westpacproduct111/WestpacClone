@@ -40,28 +40,83 @@ export default function Home() {
       </div>
 
       {/* Main Header */}
-      <header className="bg-white sticky top-0 z-50" data-testid="header-main">
+      <header className="bg-white border-b-4 border-[#DA1710] sticky top-0 z-50" data-testid="header-main">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+          <div className="flex items-center justify-between h-12">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <img src={logoImage} alt="Westpac" className="h-10 lg:h-12" data-testid="img-logo" />
+              <img src={logoImage} alt="Westpac" className="h-8" data-testid="img-logo" />
             </div>
 
+            {/* Main Navigation - Desktop */}
+            <nav className="hidden lg:flex items-center gap-1 text-sm font-normal" data-testid="nav-main">
+              <a 
+                href="#" 
+                className="text-foreground hover:text-[#DA1710] px-2" 
+                data-testid="link-nav-home"
+              >
+                Home
+              </a>
+              <span className="text-muted-foreground">|</span>
+              <a 
+                href="#" 
+                className="text-foreground hover:text-[#DA1710] px-2" 
+                data-testid="link-nav-personal"
+              >
+                Personal
+              </a>
+              <span className="text-muted-foreground">|</span>
+              <a 
+                href="#" 
+                className="text-foreground hover:text-[#DA1710] px-2" 
+                data-testid="link-nav-business"
+              >
+                Business
+              </a>
+              <span className="text-muted-foreground">|</span>
+              <a 
+                href="#" 
+                className="text-foreground hover:text-[#DA1710] px-2" 
+                data-testid="link-nav-corporate"
+              >
+                Corporate
+              </a>
+              <span className="text-muted-foreground">|</span>
+              <a 
+                href="#" 
+                className="text-foreground hover:text-[#DA1710] px-2" 
+                data-testid="link-nav-about"
+              >
+                About us
+              </a>
+              <span className="text-muted-foreground">|</span>
+              <a 
+                href="#" 
+                className="text-foreground hover:text-[#DA1710] px-2" 
+                data-testid="link-nav-help"
+              >
+                Help
+              </a>
+            </nav>
+
             {/* Right Side Actions */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               {/* Online Banking Dropdown - Desktop */}
               <Button
                 variant="ghost"
-                className="hidden lg:flex items-center gap-1 text-sm font-medium"
+                className="hidden lg:flex items-center gap-1 text-xs font-normal"
                 data-testid="button-online-banking"
               >
                 Online Banking - Personal
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-3 w-3" />
               </Button>
 
               {/* Sign In Button */}
-              <Button className="bg-[#DA1710] hover:bg-[#C01309] text-white hidden sm:flex" data-testid="button-signin">
+              <Button 
+                size="sm"
+                className="bg-[#DA1710] hover:bg-[#C01309] text-white hidden sm:flex text-xs font-medium" 
+                data-testid="button-signin"
+              >
                 Sign in
               </Button>
 
@@ -69,10 +124,10 @@ export default function Home() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="hidden lg:flex"
+                className="hidden lg:flex h-8 w-8"
                 data-testid="button-search"
               >
-                <Search className="h-5 w-5" />
+                <Search className="h-4 w-4" />
               </Button>
 
               {/* Mobile Menu Button */}
@@ -87,52 +142,6 @@ export default function Home() {
               </Button>
             </div>
           </div>
-
-          {/* Main Navigation Tabs - Full Width */}
-          <nav className="hidden lg:flex items-center gap-12 border-b border-border" data-testid="nav-main">
-            <a 
-              href="#" 
-              className="text-foreground text-lg font-normal py-4 border-b-4 border-[#DA1710]" 
-              data-testid="link-nav-home"
-            >
-              Home
-            </a>
-            <a 
-              href="#" 
-              className="text-foreground text-lg font-normal py-4 border-b-4 border-transparent hover:border-[#DA1710]" 
-              data-testid="link-nav-personal"
-            >
-              Personal
-            </a>
-            <a 
-              href="#" 
-              className="text-foreground text-lg font-normal py-4 border-b-4 border-transparent hover:border-[#DA1710]" 
-              data-testid="link-nav-business"
-            >
-              Business
-            </a>
-            <a 
-              href="#" 
-              className="text-foreground text-lg font-normal py-4 border-b-4 border-transparent hover:border-[#DA1710]" 
-              data-testid="link-nav-corporate"
-            >
-              Corporate
-            </a>
-            <a 
-              href="#" 
-              className="text-foreground text-lg font-normal py-4 border-b-4 border-transparent hover:border-[#DA1710]" 
-              data-testid="link-nav-about"
-            >
-              About us
-            </a>
-            <a 
-              href="#" 
-              className="text-foreground text-lg font-normal py-4 border-b-4 border-transparent hover:border-[#DA1710]" 
-              data-testid="link-nav-help"
-            >
-              Help
-            </a>
-          </nav>
 
           {/* Mobile Navigation Menu */}
           {mobileMenuOpen && (
