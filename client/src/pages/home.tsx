@@ -1,0 +1,474 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { ChevronRight, MapPin, Globe, MessageSquare, HeartHandshake, Menu, Search } from "lucide-react";
+import { useState } from "react";
+import logoImage from "@assets/generated_images/Westpac_red_logo_wordmark_b8bae024.png";
+import heroImage from "@assets/generated_images/Banking_security_key_lock_b3e49ef1.png";
+import investPropertyImage from "@assets/generated_images/Investment_property_house_exterior_917d55c2.png";
+import rentalYieldImage from "@assets/generated_images/Financial_calculation_rental_yield_e2a56491.png";
+import businessFinanceImage from "@assets/generated_images/Business_finance_meeting_guide_61c0e275.png";
+import businessBankingImage from "@assets/generated_images/Business_banking_startup_workspace_159b163f.png";
+import weaveImage from "@assets/generated_images/Indigenous_weave_pattern_banner_599100b2.png";
+
+export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Top Utility Bar */}
+      <div className="border-b border-border bg-background" data-testid="utility-bar">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center justify-end h-10 gap-6 text-sm" data-testid="nav-utility">
+            <a href="#" className="text-foreground hover:text-primary transition-colors" data-testid="link-locate-us">
+              Locate us
+            </a>
+            <a href="#" className="text-foreground hover:text-primary transition-colors" data-testid="link-contact-us">
+              Contact us
+            </a>
+            <a href="#" className="text-foreground hover:text-primary transition-colors" data-testid="link-register">
+              Register
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      {/* Main Header */}
+      <header className="border-b border-border bg-background sticky top-0 z-50" data-testid="header-main">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 lg:h-20">
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              data-testid="button-mobile-menu"
+            >
+              <Menu className="h-6 w-6" />
+            </Button>
+
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <img src={logoImage} alt="Westpac" className="h-8 lg:h-10" data-testid="img-logo" />
+            </div>
+
+            {/* Main Navigation - Desktop */}
+            <nav className="hidden lg:flex items-center gap-8 text-base font-medium" data-testid="nav-main">
+              <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors" data-testid="link-nav-personal">
+                Personal
+              </a>
+              <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors" data-testid="link-nav-business">
+                Business
+              </a>
+              <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors" data-testid="link-nav-corporate">
+                Corporate
+              </a>
+            </nav>
+
+            {/* Sign In Button */}
+            <Button className="bg-primary text-primary-foreground hidden sm:flex" data-testid="button-signin">
+              Sign in to Mobile Banking
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="sm:hidden"
+              data-testid="button-search-mobile"
+            >
+              <Search className="h-5 w-5" />
+            </Button>
+          </div>
+
+          {/* Mobile Navigation Menu */}
+          {mobileMenuOpen && (
+            <nav className="lg:hidden border-t border-border py-4 space-y-2" data-testid="nav-mobile-menu">
+              <a href="#" className="block py-2 text-foreground hover:text-primary transition-colors" data-testid="link-mobile-personal">
+                Personal
+              </a>
+              <a href="#" className="block py-2 text-foreground hover:text-primary transition-colors" data-testid="link-mobile-business">
+                Business
+              </a>
+              <a href="#" className="block py-2 text-foreground hover:text-primary transition-colors" data-testid="link-mobile-corporate">
+                Corporate
+              </a>
+              <Button className="w-full bg-primary text-primary-foreground mt-4" data-testid="button-mobile-signin">
+                Sign in to Mobile Banking
+              </Button>
+            </nav>
+          )}
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative bg-gray-900 text-white" data-testid="section-hero">
+        <div className="absolute inset-0">
+          <img 
+            src={heroImage} 
+            alt="Banking security with key and lock" 
+            className="w-full h-full object-cover opacity-50" 
+            data-testid="img-hero-background"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+          <div className="max-w-3xl">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 tracking-tight leading-tight" data-testid="text-hero-headline">
+              LOCK IN A DISCOUNTED RATE FOR THE LIFE OF YOUR HOME LOAN PACKAGE
+            </h1>
+            <p className="text-base sm:text-lg lg:text-xl mb-8 text-white/90 leading-relaxed" data-testid="text-hero-description">
+              Available for packaged home loans with $395 annual fee. Conditions, credit criteria, eligibility, fees and charges apply.
+            </p>
+            <Button 
+              size="lg"
+              className="bg-primary text-primary-foreground group text-base font-semibold" 
+              data-testid="button-hero-cta"
+            >
+              Find out more
+              <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content Area */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid lg:grid-cols-4 gap-8">
+          {/* Left Column - Product Sections */}
+          <div className="lg:col-span-3 space-y-12">
+            {/* Personal Banking Section */}
+            <section data-testid="section-personal">
+              <h2 className="text-2xl lg:text-3xl font-bold mb-6 text-foreground" data-testid="text-heading-personal">
+                Personal
+              </h2>
+              <nav className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-testid="nav-personal-products">
+                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-bank-accounts">
+                  Bank accounts
+                </a>
+                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-home-loans">
+                  Home loans
+                </a>
+                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-credit-cards">
+                  Credit cards
+                </a>
+                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-personal-loans">
+                  Personal loans
+                </a>
+                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-share-trading">
+                  Share Trading
+                </a>
+                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-investments">
+                  Investments
+                </a>
+                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-insurance">
+                  Insurance
+                </a>
+                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-international-travel">
+                  International &amp; Travel
+                </a>
+                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-superannuation">
+                  Superannuation
+                </a>
+              </nav>
+            </section>
+
+            {/* Latest Articles Section */}
+            <section data-testid="section-articles">
+              <header className="flex items-center justify-between mb-6" data-testid="header-articles">
+                <h2 className="text-xl lg:text-2xl font-bold text-foreground" data-testid="text-heading-articles">
+                  Latest articles for you
+                </h2>
+              </header>
+              <div className="grid sm:grid-cols-2 gap-6" data-testid="grid-articles">
+                {/* Article 1 */}
+                <Card className="overflow-hidden hover-elevate" data-testid="card-article-1">
+                  <a href="#" className="block" data-testid="link-article-1">
+                    <img 
+                      src={investPropertyImage} 
+                      alt="Investment property strategies" 
+                      className="w-full h-48 object-cover" 
+                      data-testid="img-article-1"
+                    />
+                    <div className="p-6">
+                      <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-1-title">
+                        Investment property strategies
+                      </h3>
+                      <p className="text-muted-foreground text-sm" data-testid="text-article-1-description">
+                        Tips to invest smarter.
+                      </p>
+                    </div>
+                  </a>
+                </Card>
+
+                {/* Article 2 */}
+                <Card className="overflow-hidden hover-elevate" data-testid="card-article-2">
+                  <a href="#" className="block" data-testid="link-article-2">
+                    <img 
+                      src={rentalYieldImage} 
+                      alt="Calculating rental yield" 
+                      className="w-full h-48 object-cover" 
+                      data-testid="img-article-2"
+                    />
+                    <div className="p-6">
+                      <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-2-title">
+                        Calculating rental yield
+                      </h3>
+                      <p className="text-muted-foreground text-sm" data-testid="text-article-2-description">
+                        Learn if a property is worth investing in and how much you could earn.
+                      </p>
+                    </div>
+                  </a>
+                </Card>
+
+                {/* Article 3 */}
+                <Card className="p-6 hover-elevate" data-testid="card-article-3">
+                  <a href="#" className="block" data-testid="link-article-3">
+                    <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-3-title">
+                      Home equity for investment
+                    </h3>
+                    <p className="text-muted-foreground text-sm" data-testid="text-article-3-description">
+                      Explore how to use your home's equity to buy an investment property.
+                    </p>
+                  </a>
+                </Card>
+
+                {/* Article 4 */}
+                <Card className="p-6 hover-elevate" data-testid="card-article-4">
+                  <a href="#" className="block" data-testid="link-article-4">
+                    <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-4-title">
+                      Investment property costs
+                    </h3>
+                    <p className="text-muted-foreground text-sm" data-testid="text-article-4-description">
+                      Get a clear view of the fees and expenses involved in property investment.
+                    </p>
+                  </a>
+                </Card>
+              </div>
+              <div className="mt-6">
+                <a href="#" className="text-primary hover:underline font-medium inline-flex items-center" data-testid="link-more-articles">
+                  More articles
+                  <ChevronRight className="ml-1 h-4 w-4" />
+                </a>
+              </div>
+            </section>
+
+            {/* Business Banking Section */}
+            <section className="bg-muted/50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-12" data-testid="section-business">
+              <div className="max-w-7xl mx-auto">
+                <h2 className="text-2xl lg:text-3xl font-bold mb-6 text-foreground" data-testid="text-heading-business">
+                  Business
+                </h2>
+                <nav className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12" data-testid="nav-business-products">
+                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-bank-accounts">
+                    Bank accounts
+                  </a>
+                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-savings">
+                    Savings accounts
+                  </a>
+                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-credit-cards">
+                    Credit cards
+                  </a>
+                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-fx-international">
+                    FX &amp; international
+                  </a>
+                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-loans">
+                    Business loans
+                  </a>
+                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-eftpos">
+                    EFTPOS &amp; eCommerce
+                  </a>
+                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-super">
+                    Superannuation
+                  </a>
+                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-invoicing">
+                    Invoicing
+                  </a>
+                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-insurance">
+                    Insurance for business
+                  </a>
+                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-help">
+                    Help for your business
+                  </a>
+                </nav>
+
+                {/* Business Articles */}
+                <div data-testid="container-business-help">
+                  <header className="mb-6" data-testid="header-business-help">
+                    <h3 className="text-xl lg:text-2xl font-bold text-foreground" data-testid="text-heading-business-help">
+                      Help for your business
+                    </h3>
+                  </header>
+                  <div className="grid sm:grid-cols-2 gap-6" data-testid="grid-business-articles">
+                    {/* Business Article 1 */}
+                    <Card className="overflow-hidden hover-elevate" data-testid="card-business-article-1">
+                      <a href="#" className="block" data-testid="link-business-article-1">
+                        <img 
+                          src={businessFinanceImage} 
+                          alt="A simple guide to business finance" 
+                          className="w-full h-48 object-cover" 
+                          data-testid="img-business-article-1"
+                        />
+                        <div className="p-6">
+                          <h4 className="text-lg font-bold mb-2 text-foreground" data-testid="text-business-article-1-title">
+                            A simple guide to business finance
+                          </h4>
+                          <p className="text-muted-foreground text-sm" data-testid="text-business-article-1-description">
+                            Learn what's involved in getting a business loan and how to prepare if you're considering applying.
+                          </p>
+                        </div>
+                      </a>
+                    </Card>
+
+                    {/* Business Article 2 */}
+                    <Card className="overflow-hidden hover-elevate" data-testid="card-business-article-2">
+                      <a href="#" className="block" data-testid="link-business-article-2">
+                        <img 
+                          src={businessBankingImage} 
+                          alt="Business banking 101" 
+                          className="w-full h-48 object-cover" 
+                          data-testid="img-business-article-2"
+                        />
+                        <div className="p-6">
+                          <h4 className="text-lg font-bold mb-2 text-foreground" data-testid="text-business-article-2-title">
+                            Business banking 101
+                          </h4>
+                          <p className="text-muted-foreground text-sm" data-testid="text-business-article-2-description">
+                            4 reasons to keep personal and business separate.
+                          </p>
+                        </div>
+                      </a>
+                    </Card>
+
+                    {/* Business Article 3 */}
+                    <Card className="p-6 hover-elevate" data-testid="card-business-article-3">
+                      <a href="#" className="block" data-testid="link-business-article-3">
+                        <h4 className="text-lg font-bold mb-2 text-foreground" data-testid="text-business-article-3-title">
+                          International payments
+                        </h4>
+                        <p className="text-muted-foreground text-sm" data-testid="text-business-article-3-description">
+                          What you need to receive money from overseas, including our SWIFT code.
+                        </p>
+                      </a>
+                    </Card>
+
+                    {/* Business Article 4 */}
+                    <Card className="p-6 hover-elevate" data-testid="card-business-article-4">
+                      <a href="#" className="block" data-testid="link-business-article-4">
+                        <h4 className="text-lg font-bold mb-2 text-foreground" data-testid="text-business-article-4-title">
+                          Industry insights
+                        </h4>
+                        <p className="text-muted-foreground text-sm" data-testid="text-business-article-4-description">
+                          Explore resources designed to help you improve your business.
+                        </p>
+                      </a>
+                    </Card>
+                  </div>
+                  <div className="mt-6">
+                    <a href="#" className="text-primary hover:underline font-medium inline-flex items-center" data-testid="link-more-business-help">
+                      More help for your business
+                      <ChevronRight className="ml-1 h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          {/* Right Sidebar - Widgets */}
+          <aside className="lg:col-span-1 space-y-6" data-testid="sidebar-widgets">
+            {/* Branches & ATMs Widget */}
+            <Card className="p-6" data-testid="card-branches-atms">
+              <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-foreground" data-testid="text-widget-branches">
+                <MapPin className="h-5 w-5 text-primary" />
+                Branches &amp; ATMs
+              </h3>
+              <div className="space-y-3">
+                <Input 
+                  type="search" 
+                  placeholder="Suburb / postcode" 
+                  className="w-full" 
+                  data-testid="input-branch-search"
+                />
+                <Button 
+                  className="w-full bg-primary text-primary-foreground" 
+                  data-testid="button-find-branch"
+                >
+                  Search
+                </Button>
+              </div>
+            </Card>
+
+            {/* Overseas ATMs Widget */}
+            <Card className="p-6" data-testid="card-overseas-atms">
+              <h3 className="text-lg font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-overseas">
+                <Globe className="h-5 w-5 text-primary" />
+                Overseas ATMs
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4" data-testid="text-overseas-description">
+                Use the{" "}
+                <a href="#" className="text-primary hover:underline font-medium" data-testid="link-global-atm-finder">
+                  Global ATM finder
+                </a>
+                {" "}to search our Global ATM Alliance network.
+              </p>
+            </Card>
+
+            {/* Have Your Say Widget */}
+            <Card className="p-6" data-testid="card-feedback">
+              <h3 className="text-lg font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-feedback">
+                <MessageSquare className="h-5 w-5 text-primary" />
+                Have your say
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4" data-testid="text-feedback-description">
+                We welcome your feedback whether it's a compliment, suggestion or a complaint.{" "}
+                <a href="#" className="text-primary hover:underline font-medium" data-testid="link-feedback">
+                  Find out more
+                </a>
+                .
+              </p>
+            </Card>
+
+            {/* Westpac Assist Widget */}
+            <Card className="p-6" data-testid="card-assist">
+              <h3 className="text-lg font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-assist">
+                <HeartHandshake className="h-5 w-5 text-primary" />
+                Westpac Assist
+              </h3>
+              <p className="text-sm text-muted-foreground mb-1" data-testid="text-assist-question">
+                Experiencing financial hardship?
+              </p>
+              <a href="#" className="text-primary hover:underline text-sm font-medium block" data-testid="link-assist">
+                We are here to help
+              </a>
+            </Card>
+          </aside>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-muted/30 border-t border-border mt-16" data-testid="footer-main">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+          <div className="flex flex-col lg:flex-row items-start lg:items-start gap-8">
+            <div className="flex-shrink-0">
+              <img 
+                src={weaveImage} 
+                alt="Westpac Aboriginal and Torres Strait Islander weave pattern" 
+                className="w-56 h-auto" 
+                data-testid="img-weave-pattern" 
+              />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-3xl" data-testid="text-acknowledgment">
+                Westpac acknowledges the Traditional Owners as the custodians of this land, recognising their connection to land, waters and community. We pay our respects to Australia's First Peoples, and to their Elders, past and present.{" "}
+                <a href="#" className="text-primary hover:underline font-medium" data-testid="link-indigenous-hub">
+                  View our Indigenous Hub
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
