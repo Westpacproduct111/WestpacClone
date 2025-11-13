@@ -12,10 +12,25 @@ const app = express();
 app.set('trust proxy', 1);
 
 // CORS configuration - CRITICAL for cross-browser/incognito login
+// Allow both Replit domain and custom domain
+const allowedOrigins = [
+  'https://b476f12f-5270-4f04-aa3d-5a55d7c8d23e-00-3i6su1g5ouynk.picard.replit.dev',
+  'https://wespacfinancial.online',
+  'http://localhost:5000',
+  'http://localhost:3000',
+];
+
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow all origins for development
-    callback(null, true);
+    // Allow requests with no origin (like mobile apps, Postman, or server-to-server)
+    if (!origin) return callback(null, true);
+    
+    // Check if the origin is in the allowedOrigins list or allow all for development
+    if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV === 'development') {
+      callback(null, true);
+    } else {
+      callback(null, true); // For now, allow all origins during development
+    }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
