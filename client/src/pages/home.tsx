@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { ChevronRight, MapPin, Globe, MessageSquare, HeartHandshake, Menu, Search } from "lucide-react";
+import { ChevronRight, MapPin, Globe, MessageSquare, HeartHandshake, Menu, Search, ChevronDown, Home as HomeIcon, CreditCard, PiggyBank } from "lucide-react";
 import { useState } from "react";
 import logoImage from "@assets/generated_images/Westpac_red_logo_wordmark_b8bae024.png";
 import heroImage from "@assets/generated_images/Banking_security_key_lock_b3e49ef1.png";
@@ -16,17 +16,23 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Top Utility Bar */}
-      <div className="border-b border-border bg-background" data-testid="utility-bar">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center justify-end h-10 gap-6 text-sm" data-testid="nav-utility">
-            <a href="#" className="text-foreground hover:text-primary transition-colors" data-testid="link-locate-us">
-              Locate us
-            </a>
-            <a href="#" className="text-foreground hover:text-primary transition-colors" data-testid="link-contact-us">
+      {/* Top Red Banner */}
+      <div className="bg-[#DA1710] text-white" data-testid="banner-top">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+          <nav className="flex items-center justify-end h-10 gap-4 text-xs font-medium" data-testid="nav-utility">
+            <a href="#" className="hover:underline" data-testid="link-contact-us">
               Contact us
             </a>
-            <a href="#" className="text-foreground hover:text-primary transition-colors" data-testid="link-register">
+            <span className="text-white/60">|</span>
+            <a href="#" className="hover:underline" data-testid="link-locate-us">
+              Locate us
+            </a>
+            <span className="text-white/60">|</span>
+            <a href="#" className="hover:underline" data-testid="link-lost-stolen">
+              Lost or stolen cards
+            </a>
+            <span className="text-white/60">|</span>
+            <a href="#" className="hover:underline" data-testid="link-register">
               Register
             </a>
           </nav>
@@ -34,65 +40,98 @@ export default function Home() {
       </div>
 
       {/* Main Header */}
-      <header className="border-b border-border bg-background sticky top-0 z-50" data-testid="header-main">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <header className="bg-white border-b border-border sticky top-0 z-50 shadow-sm" data-testid="header-main">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              data-testid="button-mobile-menu"
-            >
-              <Menu className="h-6 w-6" />
-            </Button>
-
             {/* Logo */}
             <div className="flex-shrink-0">
-              <img src={logoImage} alt="Westpac" className="h-8 lg:h-10" data-testid="img-logo" />
+              <img src={logoImage} alt="Westpac" className="h-6 lg:h-8" data-testid="img-logo" />
             </div>
 
             {/* Main Navigation - Desktop */}
-            <nav className="hidden lg:flex items-center gap-8 text-base font-medium" data-testid="nav-main">
-              <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors" data-testid="link-nav-personal">
+            <nav className="hidden lg:flex items-center gap-6 text-sm font-medium flex-1 ml-12" data-testid="nav-main">
+              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-home">
+                Home
+              </a>
+              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-personal">
                 Personal
               </a>
-              <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors" data-testid="link-nav-business">
+              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-business">
                 Business
               </a>
-              <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors" data-testid="link-nav-corporate">
+              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-corporate">
                 Corporate
+              </a>
+              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-about">
+                About us
+              </a>
+              <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline" data-testid="link-nav-help">
+                Help
               </a>
             </nav>
 
-            {/* Sign In Button */}
-            <Button className="bg-primary text-primary-foreground hidden sm:flex" data-testid="button-signin">
-              Sign in to Mobile Banking
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="sm:hidden"
-              data-testid="button-search-mobile"
-            >
-              <Search className="h-5 w-5" />
-            </Button>
+            {/* Right Side Actions */}
+            <div className="flex items-center gap-3">
+              {/* Online Banking Dropdown - Desktop */}
+              <Button
+                variant="ghost"
+                className="hidden lg:flex items-center gap-1 text-sm font-medium"
+                data-testid="button-online-banking"
+              >
+                Online Banking - Personal
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+
+              {/* Sign In Button */}
+              <Button className="bg-[#DA1710] hover:bg-[#C01309] text-white hidden sm:flex" data-testid="button-signin">
+                Sign in
+              </Button>
+
+              {/* Search Icon */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hidden lg:flex"
+                data-testid="button-search"
+              >
+                <Search className="h-5 w-5" />
+              </Button>
+
+              {/* Mobile Menu Button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                data-testid="button-mobile-menu"
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+            </div>
           </div>
 
           {/* Mobile Navigation Menu */}
           {mobileMenuOpen && (
             <nav className="lg:hidden border-t border-border py-4 space-y-2" data-testid="nav-mobile-menu">
-              <a href="#" className="block py-2 text-foreground hover:text-primary transition-colors" data-testid="link-mobile-personal">
+              <a href="#" className="block py-2 text-foreground hover:text-[#DA1710]" data-testid="link-mobile-home">
+                Home
+              </a>
+              <a href="#" className="block py-2 text-foreground hover:text-[#DA1710]" data-testid="link-mobile-personal">
                 Personal
               </a>
-              <a href="#" className="block py-2 text-foreground hover:text-primary transition-colors" data-testid="link-mobile-business">
+              <a href="#" className="block py-2 text-foreground hover:text-[#DA1710]" data-testid="link-mobile-business">
                 Business
               </a>
-              <a href="#" className="block py-2 text-foreground hover:text-primary transition-colors" data-testid="link-mobile-corporate">
+              <a href="#" className="block py-2 text-foreground hover:text-[#DA1710]" data-testid="link-mobile-corporate">
                 Corporate
               </a>
-              <Button className="w-full bg-primary text-primary-foreground mt-4" data-testid="button-mobile-signin">
+              <a href="#" className="block py-2 text-foreground hover:text-[#DA1710]" data-testid="link-mobile-about">
+                About us
+              </a>
+              <a href="#" className="block py-2 text-foreground hover:text-[#DA1710]" data-testid="link-mobile-help">
+                Help
+              </a>
+              <Button className="w-full bg-[#DA1710] hover:bg-[#C01309] text-white mt-4" data-testid="button-mobile-signin">
                 Sign in to Mobile Banking
               </Button>
             </nav>
@@ -100,39 +139,118 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative bg-gray-900 text-white" data-testid="section-hero">
+      {/* Hero Section with Background Image */}
+      <section className="relative bg-[#7A1810]" data-testid="section-hero">
         <div className="absolute inset-0">
           <img 
             src={heroImage} 
-            alt="Banking security with key and lock" 
-            className="w-full h-full object-cover opacity-50" 
+            alt="Door with brass key in lock" 
+            className="w-full h-full object-cover mix-blend-overlay opacity-70" 
             data-testid="img-hero-background"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-          <div className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 tracking-tight leading-tight" data-testid="text-hero-headline">
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <div className="max-w-2xl text-white">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 tracking-tight leading-tight uppercase" data-testid="text-hero-headline">
               LOCK IN A DISCOUNTED RATE FOR THE LIFE OF YOUR HOME LOAN PACKAGE
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl mb-8 text-white/90 leading-relaxed" data-testid="text-hero-description">
+            <p className="text-base sm:text-lg mb-6 text-white/95 leading-relaxed" data-testid="text-hero-description">
               Available for packaged home loans with $395 annual fee. Conditions, credit criteria, eligibility, fees and charges apply.
             </p>
             <Button 
               size="lg"
-              className="bg-primary text-primary-foreground group text-base font-semibold" 
+              className="bg-[#DA1710] text-white hover:bg-[#C01309] font-semibold px-8" 
               data-testid="button-hero-cta"
             >
               Find out more
-              <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
       </section>
 
+      {/* IT TAKES A LITTLE Section */}
+      <section className="bg-white py-12 border-b border-border" data-testid="section-branding">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center gap-4">
+            <h2 className="text-2xl lg:text-3xl font-bold text-[#2C2C2C] tracking-wide" data-testid="text-tagline">
+              IT TAKES A LITTLE
+            </h2>
+            <div className="w-12 h-12 lg:w-16 lg:h-16">
+              <svg viewBox="0 0 100 100" className="w-full h-full">
+                <polygon points="50,0 100,50 50,100 0,50" fill="#DA1710"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Three Column Product Showcase */}
+      <section className="bg-white py-12 lg:py-16 border-b border-border" data-testid="section-products-showcase">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+            {/* Home Loans */}
+            <div className="text-center" data-testid="card-product-home-loans">
+              <div className="mb-4 flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-[#FFE5E5] flex items-center justify-center">
+                  <HomeIcon className="w-8 h-8 text-[#DA1710]" />
+                </div>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold mb-2 text-foreground" data-testid="text-product-home-title">
+                Home loans
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4" data-testid="text-product-home-desc">
+                Compare loans and rates
+              </p>
+              <a href="#" className="text-[#DA1710] hover:underline text-sm font-medium inline-flex items-center" data-testid="link-product-home">
+                Learn more
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </a>
+            </div>
+
+            {/* Bank Accounts */}
+            <div className="text-center" data-testid="card-product-bank-accounts">
+              <div className="mb-4 flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-[#FFE5E5] flex items-center justify-center">
+                  <PiggyBank className="w-8 h-8 text-[#DA1710]" />
+                </div>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold mb-2 text-foreground" data-testid="text-product-bank-title">
+                Bank accounts
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4" data-testid="text-product-bank-desc">
+                Transaction accounts
+              </p>
+              <a href="#" className="text-[#DA1710] hover:underline text-sm font-medium inline-flex items-center" data-testid="link-product-bank">
+                Learn more
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </a>
+            </div>
+
+            {/* Credit Cards */}
+            <div className="text-center" data-testid="card-product-credit-cards">
+              <div className="mb-4 flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-[#FFE5E5] flex items-center justify-center">
+                  <CreditCard className="w-8 h-8 text-[#DA1710]" />
+                </div>
+              </div>
+              <h3 className="text-xl lg:text-2xl font-bold mb-2 text-foreground" data-testid="text-product-credit-title">
+                Credit cards
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4" data-testid="text-product-credit-desc">
+                Rewards credit cards
+              </p>
+              <a href="#" className="text-[#DA1710] hover:underline text-sm font-medium inline-flex items-center" data-testid="link-product-credit">
+                Learn more
+                <ChevronRight className="ml-1 h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content Area */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid lg:grid-cols-4 gap-8">
           {/* Left Column - Product Sections */}
           <div className="lg:col-span-3 space-y-12">
@@ -141,32 +259,32 @@ export default function Home() {
               <h2 className="text-2xl lg:text-3xl font-bold mb-6 text-foreground" data-testid="text-heading-personal">
                 Personal
               </h2>
-              <nav className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" data-testid="nav-personal-products">
-                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-bank-accounts">
+              <nav className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3" data-testid="nav-personal-products">
+                <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-bank-accounts">
                   Bank accounts
                 </a>
-                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-home-loans">
+                <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-home-loans">
                   Home loans
                 </a>
-                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-credit-cards">
+                <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-credit-cards">
                   Credit cards
                 </a>
-                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-personal-loans">
+                <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-personal-loans">
                   Personal loans
                 </a>
-                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-share-trading">
+                <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-share-trading">
                   Share Trading
                 </a>
-                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-investments">
+                <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-investments">
                   Investments
                 </a>
-                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-insurance">
+                <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-insurance">
                   Insurance
                 </a>
-                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-international-travel">
+                <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-international-travel">
                   International &amp; Travel
                 </a>
-                <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-superannuation">
+                <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-superannuation">
                   Superannuation
                 </a>
               </nav>
@@ -189,7 +307,7 @@ export default function Home() {
                       className="w-full h-48 object-cover" 
                       data-testid="img-article-1"
                     />
-                    <div className="p-6">
+                    <div className="p-5">
                       <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-1-title">
                         Investment property strategies
                       </h3>
@@ -209,7 +327,7 @@ export default function Home() {
                       className="w-full h-48 object-cover" 
                       data-testid="img-article-2"
                     />
-                    <div className="p-6">
+                    <div className="p-5">
                       <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-2-title">
                         Calculating rental yield
                       </h3>
@@ -221,7 +339,7 @@ export default function Home() {
                 </Card>
 
                 {/* Article 3 */}
-                <Card className="p-6 hover-elevate" data-testid="card-article-3">
+                <Card className="p-5 hover-elevate" data-testid="card-article-3">
                   <a href="#" className="block" data-testid="link-article-3">
                     <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-3-title">
                       Home equity for investment
@@ -233,7 +351,7 @@ export default function Home() {
                 </Card>
 
                 {/* Article 4 */}
-                <Card className="p-6 hover-elevate" data-testid="card-article-4">
+                <Card className="p-5 hover-elevate" data-testid="card-article-4">
                   <a href="#" className="block" data-testid="link-article-4">
                     <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-4-title">
                       Investment property costs
@@ -245,7 +363,7 @@ export default function Home() {
                 </Card>
               </div>
               <div className="mt-6">
-                <a href="#" className="text-primary hover:underline font-medium inline-flex items-center" data-testid="link-more-articles">
+                <a href="#" className="text-[#DA1710] hover:underline font-medium inline-flex items-center" data-testid="link-more-articles">
                   More articles
                   <ChevronRight className="ml-1 h-4 w-4" />
                 </a>
@@ -253,40 +371,40 @@ export default function Home() {
             </section>
 
             {/* Business Banking Section */}
-            <section className="bg-muted/50 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-12" data-testid="section-business">
-              <div className="max-w-7xl mx-auto">
+            <section className="bg-muted/30 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 py-12 rounded-md" data-testid="section-business">
+              <div className="max-w-[1200px] mx-auto">
                 <h2 className="text-2xl lg:text-3xl font-bold mb-6 text-foreground" data-testid="text-heading-business">
                   Business
                 </h2>
-                <nav className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12" data-testid="nav-business-products">
-                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-bank-accounts">
+                <nav className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3 mb-12" data-testid="nav-business-products">
+                  <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-business-bank-accounts">
                     Bank accounts
                   </a>
-                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-savings">
+                  <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-business-savings">
                     Savings accounts
                   </a>
-                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-credit-cards">
+                  <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-business-credit-cards">
                     Credit cards
                   </a>
-                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-fx-international">
+                  <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-fx-international">
                     FX &amp; international
                   </a>
-                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-loans">
+                  <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-business-loans">
                     Business loans
                   </a>
-                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-eftpos">
+                  <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-eftpos">
                     EFTPOS &amp; eCommerce
                   </a>
-                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-super">
+                  <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-business-super">
                     Superannuation
                   </a>
-                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-invoicing">
+                  <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-invoicing">
                     Invoicing
                   </a>
-                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-insurance">
+                  <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-business-insurance">
                     Insurance for business
                   </a>
-                  <a href="#" className="text-foreground hover:text-primary hover:underline transition-colors text-base" data-testid="link-business-help">
+                  <a href="#" className="text-foreground hover:text-[#DA1710] hover:underline text-sm" data-testid="link-business-help">
                     Help for your business
                   </a>
                 </nav>
@@ -308,7 +426,7 @@ export default function Home() {
                           className="w-full h-48 object-cover" 
                           data-testid="img-business-article-1"
                         />
-                        <div className="p-6">
+                        <div className="p-5">
                           <h4 className="text-lg font-bold mb-2 text-foreground" data-testid="text-business-article-1-title">
                             A simple guide to business finance
                           </h4>
@@ -328,7 +446,7 @@ export default function Home() {
                           className="w-full h-48 object-cover" 
                           data-testid="img-business-article-2"
                         />
-                        <div className="p-6">
+                        <div className="p-5">
                           <h4 className="text-lg font-bold mb-2 text-foreground" data-testid="text-business-article-2-title">
                             Business banking 101
                           </h4>
@@ -340,7 +458,7 @@ export default function Home() {
                     </Card>
 
                     {/* Business Article 3 */}
-                    <Card className="p-6 hover-elevate" data-testid="card-business-article-3">
+                    <Card className="p-5 hover-elevate" data-testid="card-business-article-3">
                       <a href="#" className="block" data-testid="link-business-article-3">
                         <h4 className="text-lg font-bold mb-2 text-foreground" data-testid="text-business-article-3-title">
                           International payments
@@ -352,7 +470,7 @@ export default function Home() {
                     </Card>
 
                     {/* Business Article 4 */}
-                    <Card className="p-6 hover-elevate" data-testid="card-business-article-4">
+                    <Card className="p-5 hover-elevate" data-testid="card-business-article-4">
                       <a href="#" className="block" data-testid="link-business-article-4">
                         <h4 className="text-lg font-bold mb-2 text-foreground" data-testid="text-business-article-4-title">
                           Industry insights
@@ -364,7 +482,7 @@ export default function Home() {
                     </Card>
                   </div>
                   <div className="mt-6">
-                    <a href="#" className="text-primary hover:underline font-medium inline-flex items-center" data-testid="link-more-business-help">
+                    <a href="#" className="text-[#DA1710] hover:underline font-medium inline-flex items-center" data-testid="link-more-business-help">
                       More help for your business
                       <ChevronRight className="ml-1 h-4 w-4" />
                     </a>
@@ -377,9 +495,9 @@ export default function Home() {
           {/* Right Sidebar - Widgets */}
           <aside className="lg:col-span-1 space-y-6" data-testid="sidebar-widgets">
             {/* Branches & ATMs Widget */}
-            <Card className="p-6" data-testid="card-branches-atms">
-              <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-foreground" data-testid="text-widget-branches">
-                <MapPin className="h-5 w-5 text-primary" />
+            <Card className="p-5" data-testid="card-branches-atms">
+              <h3 className="text-base font-bold mb-4 flex items-center gap-2 text-foreground" data-testid="text-widget-branches">
+                <MapPin className="h-5 w-5 text-[#DA1710]" />
                 Branches &amp; ATMs
               </h3>
               <div className="space-y-3">
@@ -390,7 +508,7 @@ export default function Home() {
                   data-testid="input-branch-search"
                 />
                 <Button 
-                  className="w-full bg-primary text-primary-foreground" 
+                  className="w-full bg-[#DA1710] hover:bg-[#C01309] text-white" 
                   data-testid="button-find-branch"
                 >
                   Search
@@ -399,14 +517,14 @@ export default function Home() {
             </Card>
 
             {/* Overseas ATMs Widget */}
-            <Card className="p-6" data-testid="card-overseas-atms">
-              <h3 className="text-lg font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-overseas">
-                <Globe className="h-5 w-5 text-primary" />
+            <Card className="p-5" data-testid="card-overseas-atms">
+              <h3 className="text-base font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-overseas">
+                <Globe className="h-5 w-5 text-[#DA1710]" />
                 Overseas ATMs
               </h3>
-              <p className="text-sm text-muted-foreground mb-4" data-testid="text-overseas-description">
+              <p className="text-sm text-muted-foreground" data-testid="text-overseas-description">
                 Use the{" "}
-                <a href="#" className="text-primary hover:underline font-medium" data-testid="link-global-atm-finder">
+                <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-global-atm-finder">
                   Global ATM finder
                 </a>
                 {" "}to search our Global ATM Alliance network.
@@ -414,14 +532,14 @@ export default function Home() {
             </Card>
 
             {/* Have Your Say Widget */}
-            <Card className="p-6" data-testid="card-feedback">
-              <h3 className="text-lg font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-feedback">
-                <MessageSquare className="h-5 w-5 text-primary" />
+            <Card className="p-5" data-testid="card-feedback">
+              <h3 className="text-base font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-feedback">
+                <MessageSquare className="h-5 w-5 text-[#DA1710]" />
                 Have your say
               </h3>
-              <p className="text-sm text-muted-foreground mb-4" data-testid="text-feedback-description">
+              <p className="text-sm text-muted-foreground" data-testid="text-feedback-description">
                 We welcome your feedback whether it's a compliment, suggestion or a complaint.{" "}
-                <a href="#" className="text-primary hover:underline font-medium" data-testid="link-feedback">
+                <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-feedback">
                   Find out more
                 </a>
                 .
@@ -429,15 +547,15 @@ export default function Home() {
             </Card>
 
             {/* Westpac Assist Widget */}
-            <Card className="p-6" data-testid="card-assist">
-              <h3 className="text-lg font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-assist">
-                <HeartHandshake className="h-5 w-5 text-primary" />
+            <Card className="p-5" data-testid="card-assist">
+              <h3 className="text-base font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-assist">
+                <HeartHandshake className="h-5 w-5 text-[#DA1710]" />
                 Westpac Assist
               </h3>
               <p className="text-sm text-muted-foreground mb-1" data-testid="text-assist-question">
                 Experiencing financial hardship?
               </p>
-              <a href="#" className="text-primary hover:underline text-sm font-medium block" data-testid="link-assist">
+              <a href="#" className="text-[#DA1710] hover:underline text-sm font-medium block" data-testid="link-assist">
                 We are here to help
               </a>
             </Card>
@@ -446,21 +564,21 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-muted/30 border-t border-border mt-16" data-testid="footer-main">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <footer className="bg-muted/20 border-t border-border mt-16" data-testid="footer-main">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <div className="flex flex-col lg:flex-row items-start lg:items-start gap-8">
             <div className="flex-shrink-0">
               <img 
                 src={weaveImage} 
-                alt="Westpac Aboriginal and Torres Strait Islander weave pattern" 
-                className="w-56 h-auto" 
-                data-testid="img-weave-pattern" 
+                alt="Indigenous weave pattern" 
+                className="h-24 lg:h-28 w-auto" 
+                data-testid="img-footer-weave"
               />
             </div>
-            <div className="flex-1">
+            <div>
               <p className="text-sm text-muted-foreground leading-relaxed max-w-3xl" data-testid="text-acknowledgment">
-                Westpac acknowledges the Traditional Owners as the custodians of this land, recognising their connection to land, waters and community. We pay our respects to Australia's First Peoples, and to their Elders, past and present.{" "}
-                <a href="#" className="text-primary hover:underline font-medium" data-testid="link-indigenous-hub">
+                Westpac acknowledges the Traditional Owners as the custodians of this land, recognising their connection to land, waters and community. We pay our respects to Australia's First Peoples, and to their Elders past and present.{" "}
+                <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-indigenous-hub">
                   View our Indigenous Hub
                 </a>
                 .
