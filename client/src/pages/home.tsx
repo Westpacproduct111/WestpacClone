@@ -395,7 +395,7 @@ export default function Home() {
                   </h3>
                   <ul className="space-y-2">
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-share-trading">
+                      <a href="https://www.westpac.com.au/personal-banking/share-trading/?fid=HP:product:discover:subhead:wbc:www:pers:share-trading" className="text-sm text-foreground hover:underline" data-testid="link-share-trading">
                         Share trading
                       </a>
                     </li>
