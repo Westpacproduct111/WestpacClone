@@ -405,7 +405,7 @@ export default function Home() {
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-international">
+                      <a href="https://www.westpac.com.au/international-travel/?fid=HP:product:discover:subhead:wbc:www:international-travel" className="text-sm text-foreground hover:underline" data-testid="link-international">
                         International & Travel
                       </a>
                     </li>
