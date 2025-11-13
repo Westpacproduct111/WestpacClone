@@ -338,7 +338,7 @@ export default function Home() {
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-car-loan">
+                      <a href="https://www.westpac.com.au/personal-banking/personal-loans/car-loan/?fid=HP:product:pls:subhead:wbc:www:pers:personal-loans:car-loan" className="text-sm text-foreground hover:underline" data-testid="link-car-loan">
                         Car Loan
                       </a>
                     </li>
