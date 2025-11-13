@@ -17,17 +17,31 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { customerId, password } = req.body;
       
+      console.log("Login attempt:", { customerId, passwordLength: password?.length });
+      
       if (!customerId || !password) {
+        console.log("Missing credentials");
         return res.status(400).json({ error: "Customer ID and password are required" });
       }
 
       const user = await authenticateUser(customerId, password);
       
       if (!user) {
+        console.log("Authentication failed for:", customerId);
         return res.status(401).json({ error: "Invalid credentials" });
       }
 
+      console.log("User authenticated:", user.id);
       req.session.userId = user.id;
+      
+      await new Promise<void>((resolve, reject) => {
+        req.session.save((err) => {
+          if (err) reject(err);
+          else resolve();
+        });
+      });
+      
+      console.log("Session saved:", req.session.userId);
       
       const { password: _, ...userWithoutPassword } = user;
       return res.json({ user: userWithoutPassword });

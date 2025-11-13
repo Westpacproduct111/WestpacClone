@@ -29,12 +29,14 @@ app.use(session({
   }),
   secret: process.env.SESSION_SECRET || 'westpac-banking-secret-key-change-in-production',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
+  proxy: true,
   cookie: {
-    secure: process.env.NODE_ENV === 'production',
+    secure: false,
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    sameSite: 'lax'
+    sameSite: 'lax',
+    path: '/'
   }
 }));
 
