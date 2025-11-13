@@ -39,8 +39,8 @@ export default function Dashboard() {
   const totalBalance = accounts.reduce((sum, acc) => sum + parseFloat(acc.balance), 0);
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="bg-[#DA1710] text-white sticky top-0 z-50" data-testid="header-dashboard">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
+      <header className="bg-[#DA1710] text-white sticky top-0 z-50 shadow-md" data-testid="header-dashboard">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-8">
