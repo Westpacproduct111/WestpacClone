@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { ChevronRight, MapPin, Globe, MessageSquare, HeartHandshake, Menu, Search, ChevronDown, Home as HomeIcon, CreditCard, PiggyBank, Car, Building2, MoreHorizontal } from "lucide-react";
+import { ChevronRight, MapPin, Globe, MessageSquare, HeartHandshake, Menu, Search, ChevronDown, Home as HomeIcon, CreditCard, PiggyBank, Car, Building2, MoreHorizontal, Phone, Umbrella } from "lucide-react";
 import { useState } from "react";
 import logoImage from "@assets/generated_images/Westpac_red_W_logo_4eaff681.png";
 import heroImage from "@assets/ruby-necklace.jpg";
@@ -637,6 +637,150 @@ export default function Home() {
             >
               Start your investment journey
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* We're Here to Help You Section */}
+      <section className="bg-background py-16 lg:py-20" data-testid="section-help">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-12 text-[#9B1D6F]" data-testid="text-heading-help">
+            We're here to help you
+          </h2>
+
+          {/* Two Column Layout */}
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+            {/* Online Banking Help */}
+            <Card className="p-8 bg-muted/30" data-testid="card-online-banking-help">
+              <h3 className="text-xl lg:text-2xl font-black mb-6 uppercase text-[#2C2C2C]" data-testid="text-heading-online-help">
+                Online Banking Help
+              </h3>
+              <nav className="space-y-4" data-testid="nav-online-help">
+                <a href="#" className="flex items-center justify-between group text-foreground hover:text-[#DA1710]" data-testid="link-register-online">
+                  <span className="text-sm">Register for Online Banking</span>
+                  <ChevronRight className="h-4 w-4 text-[#DA1710]" />
+                </a>
+                <a href="#" className="flex items-center justify-between group text-foreground hover:text-[#DA1710]" data-testid="link-reset-password">
+                  <span className="text-sm">Reset your password</span>
+                  <ChevronRight className="h-4 w-4 text-[#DA1710]" />
+                </a>
+                <a href="#" className="flex items-center justify-between group text-foreground hover:text-[#DA1710]" data-testid="link-activate-card">
+                  <span className="text-sm">Activate your card</span>
+                  <ChevronRight className="h-4 w-4 text-[#DA1710]" />
+                </a>
+                <a href="#" className="flex items-center justify-between group text-foreground hover:text-[#DA1710]" data-testid="link-security-hub">
+                  <span className="text-sm">Stay safe online with Security Hub</span>
+                  <ChevronRight className="h-4 w-4 text-[#DA1710]" />
+                </a>
+                <a href="#" className="flex items-center justify-between group text-foreground hover:text-[#DA1710]" data-testid="link-help-faqs">
+                  <span className="text-sm">Online Banking help and FAQs</span>
+                  <ChevronRight className="h-4 w-4 text-[#DA1710]" />
+                </a>
+              </nav>
+            </Card>
+
+            {/* Contact Through App */}
+            <Card className="p-8 bg-[#E8D5F0]" data-testid="card-contact-app">
+              <h3 className="text-xl lg:text-2xl font-black mb-4 uppercase text-[#2C2C2C]" data-testid="text-heading-contact-app">
+                Contact us through the Westpac app
+              </h3>
+              <p className="text-sm text-foreground mb-6" data-testid="text-app-description">
+                Sign into the app, skip the automated questions and get through to the right person, fast.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                <a href="#" className="inline-block" data-testid="link-google-play">
+                  <div className="bg-black text-white px-4 py-2 rounded-md flex items-center gap-2">
+                    <span className="text-xs font-semibold">GET IT ON Google Play</span>
+                  </div>
+                </a>
+                <a href="#" className="inline-block" data-testid="link-app-store">
+                  <div className="bg-black text-white px-4 py-2 rounded-md flex items-center gap-2">
+                    <span className="text-xs font-semibold">Download on the App Store</span>
+                  </div>
+                </a>
+              </div>
+            </Card>
+          </div>
+
+          {/* Three Support Cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {/* Talk to Us */}
+            <Card className="p-8 text-center" data-testid="card-talk-to-us">
+              <div className="flex justify-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-[#FFE5F5] flex items-center justify-center">
+                  <Phone className="h-6 w-6 text-[#9B1D6F]" />
+                </div>
+              </div>
+              <h3 className="text-lg font-bold mb-4 text-foreground" data-testid="text-talk-to-us">
+                Talk to us
+              </h3>
+              <Button 
+                variant="outline" 
+                className="border-2" 
+                data-testid="button-contact-us"
+              >
+                Contact us
+              </Button>
+            </Card>
+
+            {/* Find Your Local Branch */}
+            <Card className="p-8 text-center" data-testid="card-find-branch">
+              <div className="flex justify-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-[#FFE5F5] flex items-center justify-center">
+                  <Building2 className="h-6 w-6 text-[#9B1D6F]" />
+                </div>
+              </div>
+              <h3 className="text-lg font-bold mb-4 text-foreground" data-testid="text-find-branch">
+                Find your local branch
+              </h3>
+              <Button 
+                variant="outline" 
+                className="border-2" 
+                data-testid="button-find-branch-help"
+              >
+                Find a branch
+              </Button>
+            </Card>
+
+            {/* Financial Hardship Support */}
+            <Card className="p-8 text-center" data-testid="card-hardship">
+              <div className="flex justify-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-[#FFE5F5] flex items-center justify-center">
+                  <Umbrella className="h-6 w-6 text-[#9B1D6F]" />
+                </div>
+              </div>
+              <h3 className="text-lg font-bold mb-4 text-foreground" data-testid="text-hardship">
+                Financial hardship support
+              </h3>
+              <Button 
+                variant="outline" 
+                className="border-2" 
+                data-testid="button-hardship"
+              >
+                Find out more
+              </Button>
+            </Card>
+          </div>
+
+          {/* IT TAKES A LITTLE Banner */}
+          <div className="relative rounded-lg overflow-hidden" data-testid="banner-cloud">
+            <div className="bg-gradient-to-r from-[#4A90C8] to-[#87CEEB] py-16 px-8 relative">
+              <div className="flex items-center justify-between">
+                <div className="text-white text-6xl lg:text-7xl font-black tracking-wider" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.2)' }}>
+                  W
+                </div>
+                <div className="flex-1 text-center">
+                  <h2 className="text-white text-3xl lg:text-4xl font-black tracking-wide" data-testid="text-cloud-tagline">
+                    IT TAKES A LITTLE
+                  </h2>
+                </div>
+                <div className="flex gap-2">
+                  <div className="w-8 h-16 bg-[#DA1710] transform -skew-x-12"></div>
+                  <div className="w-8 h-16 bg-[#DA1710] transform -skew-x-12"></div>
+                  <div className="w-8 h-16 bg-[#DA1710] transform -skew-x-12"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
