@@ -364,7 +364,7 @@ export default function Home() {
                   </h3>
                   <ul className="space-y-2">
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-business-accounts">
+                      <a href="https://www.westpac.com.au/business-banking/bank-accounts/?fid=HP:product:bus:subhead:wbc:www:bus:bank-accounts" className="text-sm text-foreground hover:underline" data-testid="link-business-accounts">
                         Bank accounts
                       </a>
                     </li>
