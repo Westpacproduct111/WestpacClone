@@ -79,21 +79,16 @@ export default function Cards() {
             return (
               <div key={card.id} data-testid={`card-${card.cardType.toLowerCase().replace(' ', '-')}`}>
                 <div 
-                  className={`relative overflow-hidden rounded-2xl p-8 text-white shadow-2xl ${
-                    isVisa 
-                      ? 'bg-gradient-to-br from-[#0D47A1] via-[#1976D2] to-[#42A5F5]'
-                      : isMastercard
-                      ? 'bg-gradient-to-br from-[#1A1A2E] via-[#16213E] to-[#0F3460]'
-                      : 'bg-gradient-to-br from-[#DA1710] via-[#E63946] to-[#F77F00]'
-                  }`}
+                  className="relative overflow-hidden rounded-2xl p-8 shadow-2xl"
                   style={{
                     aspectRatio: '1.586',
                     maxWidth: '450px',
-                    backgroundImage: isVisa 
-                      ? 'radial-gradient(circle at 100% 0%, rgba(255,255,255,0.15) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(255,255,255,0.1) 0%, transparent 50%)'
+                    background: isVisa 
+                      ? 'linear-gradient(135deg, #0D47A1 0%, #1976D2 50%, #42A5F5 100%)'
                       : isMastercard
-                      ? 'radial-gradient(circle at 100% 0%, rgba(255,255,255,0.12) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(255,255,255,0.08) 0%, transparent 50%)'
-                      : 'radial-gradient(circle at 100% 0%, rgba(255,255,255,0.2) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(255,255,255,0.15) 0%, transparent 50%)'
+                      ? 'linear-gradient(135deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%)'
+                      : 'linear-gradient(135deg, #DA1710 0%, #E63946 50%, #F77F00 100%)',
+                    color: '#ffffff'
                   }}
                 >
                   <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32" />
@@ -116,12 +111,12 @@ export default function Cards() {
                       </div>
                       <div className="text-right">
                         {isVisa && (
-                          <div className="text-4xl font-bold tracking-wider italic drop-shadow-lg">VISA</div>
+                          <div className="text-4xl font-bold tracking-wider italic drop-shadow-lg" style={{ color: '#ffffff' }}>VISA</div>
                         )}
                         {isMastercard && (
                           <div className="flex items-center">
-                            <div className="w-11 h-11 rounded-full bg-[#EB001B] shadow-lg"></div>
-                            <div className="w-11 h-11 rounded-full bg-[#FF5F00] shadow-lg -ml-5"></div>
+                            <div className="w-11 h-11 rounded-full shadow-lg" style={{ backgroundColor: '#EB001B' }}></div>
+                            <div className="w-11 h-11 rounded-full shadow-lg -ml-5" style={{ backgroundColor: '#FF5F00' }}></div>
                           </div>
                         )}
                       </div>
@@ -129,39 +124,40 @@ export default function Cards() {
 
                     <div className="space-y-6 mt-8">
                       <div>
-                        <p className="text-3xl font-mono font-bold tracking-[0.3em] drop-shadow-lg" data-testid={`card-number-${card.id}`}>
+                        <p className="text-3xl font-mono font-bold tracking-[0.3em] drop-shadow-lg" style={{ color: '#ffffff' }} data-testid={`card-number-${card.id}`}>
                           {card.cardNumber}
                         </p>
                       </div>
 
                       <div className="flex items-end justify-between">
                         <div className="flex-1">
-                          <p className="text-xs text-white/90 uppercase mb-1.5 tracking-wide font-medium">Cardholder</p>
-                          <p className="text-lg font-bold tracking-wide uppercase" data-testid={`cardholder-${card.id}`}>
+                          <p className="text-xs uppercase mb-1.5 tracking-wide font-medium" style={{ color: 'rgba(255,255,255,0.9)' }}>Cardholder</p>
+                          <p className="text-lg font-bold tracking-wide uppercase" style={{ color: '#ffffff' }} data-testid={`cardholder-${card.id}`}>
                             {card.cardholderName}
                           </p>
                         </div>
                         <div className="flex gap-6">
                           <div>
-                            <p className="text-xs text-white/90 uppercase mb-1.5 tracking-wide font-medium">Expires</p>
-                            <p className="text-lg font-bold" data-testid={`expiry-${card.id}`}>
+                            <p className="text-xs uppercase mb-1.5 tracking-wide font-medium" style={{ color: 'rgba(255,255,255,0.9)' }}>Expires</p>
+                            <p className="text-lg font-bold" style={{ color: '#ffffff' }} data-testid={`expiry-${card.id}`}>
                               {card.expiryMonth}/{card.expiryYear.slice(-2)}
                             </p>
                           </div>
                           <div>
                             <div className="flex items-center gap-1.5 mb-1.5">
-                              <p className="text-xs text-white/90 uppercase tracking-wide font-medium">CVV</p>
+                              <p className="text-xs uppercase tracking-wide font-medium" style={{ color: 'rgba(255,255,255,0.9)' }}>CVV</p>
                               <Button
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => toggleCVV(card.id)}
-                                className="h-5 w-5 p-0 text-white/90 hover:text-white hover:bg-white/20"
+                                className="h-5 w-5 p-0 hover:bg-white/20"
+                                style={{ color: 'rgba(255,255,255,0.9)' }}
                                 data-testid={`button-toggle-cvv-${card.id}`}
                               >
                                 {showCVV[card.id] ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                               </Button>
                             </div>
-                            <p className="text-lg font-mono font-bold" data-testid={`cvv-${card.id}`}>
+                            <p className="text-lg font-mono font-bold" style={{ color: '#ffffff' }} data-testid={`cvv-${card.id}`}>
                               {showCVV[card.id] ? card.cvv : '•••'}
                             </p>
                           </div>
