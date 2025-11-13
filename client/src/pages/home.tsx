@@ -276,7 +276,7 @@ export default function Home() {
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-savings-accounts">
+                      <a href="https://www.westpac.com.au/personal-banking/bank-accounts/savings-accounts/?fid=HP:product:ba:subhead:wbc:www:pers:bank-accounts:savings-accounts" className="text-sm text-foreground hover:underline" data-testid="link-savings-accounts">
                         Savings accounts
                       </a>
                     </li>
