@@ -81,42 +81,47 @@ export default function Cards() {
                 <div 
                   className={`relative overflow-hidden rounded-2xl p-8 text-white shadow-2xl ${
                     isVisa 
-                      ? 'bg-gradient-to-br from-[#1A1F71] via-[#2D3B8F] to-[#4A5BB5]'
+                      ? 'bg-gradient-to-br from-[#0D47A1] via-[#1976D2] to-[#42A5F5]'
                       : isMastercard
-                      ? 'bg-gradient-to-br from-[#0A0E27] via-[#1A1F3A] to-[#2A3050]'
-                      : 'bg-gradient-to-br from-[#DA1710] via-[#B01410] to-[#8B0F0C]'
+                      ? 'bg-gradient-to-br from-[#1A1A2E] via-[#16213E] to-[#0F3460]'
+                      : 'bg-gradient-to-br from-[#DA1710] via-[#E63946] to-[#F77F00]'
                   }`}
                   style={{
                     aspectRatio: '1.586',
                     maxWidth: '450px',
                     backgroundImage: isVisa 
-                      ? 'radial-gradient(circle at 100% 0%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(255,255,255,0.05) 0%, transparent 50%)'
-                      : 'radial-gradient(circle at 100% 0%, rgba(255,255,255,0.08) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(255,255,255,0.04) 0%, transparent 50%)'
+                      ? 'radial-gradient(circle at 100% 0%, rgba(255,255,255,0.15) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(255,255,255,0.1) 0%, transparent 50%)'
+                      : isMastercard
+                      ? 'radial-gradient(circle at 100% 0%, rgba(255,255,255,0.12) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(255,255,255,0.08) 0%, transparent 50%)'
+                      : 'radial-gradient(circle at 100% 0%, rgba(255,255,255,0.2) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(255,255,255,0.15) 0%, transparent 50%)'
                   }}
                 >
-                  <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32" />
-                  <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24" />
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32" />
+                  <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -ml-24 -mb-24" />
                   
                   <div className="relative h-full flex flex-col justify-between">
                     <div className="flex items-start justify-between">
-                      <div className="flex items-center gap-2">
-                        <div className="w-12 h-10 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-md shadow-md" />
-                        <div className={`px-2.5 py-1 rounded-full text-xs font-semibold ${
+                      <div className="flex items-center gap-3">
+                        <div className="w-14 h-11 bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-500 rounded-lg shadow-lg relative">
+                          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/20 to-transparent rounded-lg"></div>
+                          <div className="absolute inset-1 border border-amber-600/30 rounded"></div>
+                        </div>
+                        <div className={`px-3 py-1.5 rounded-full text-xs font-bold shadow-md ${
                           card.status === 'Active' 
-                            ? 'bg-green-500/20 text-green-100 border border-green-400/30' 
-                            : 'bg-gray-500/20 text-gray-200 border border-gray-400/30'
+                            ? 'bg-emerald-500 text-white' 
+                            : 'bg-gray-400 text-white'
                         }`} data-testid={`status-${card.id}`}>
                           {card.status}
                         </div>
                       </div>
                       <div className="text-right">
                         {isVisa && (
-                          <div className="text-3xl font-bold tracking-wider italic">VISA</div>
+                          <div className="text-4xl font-bold tracking-wider italic drop-shadow-lg">VISA</div>
                         )}
                         {isMastercard && (
-                          <div className="flex gap-[-8px]">
-                            <div className="w-10 h-10 rounded-full bg-red-500 opacity-90"></div>
-                            <div className="w-10 h-10 rounded-full bg-orange-400 opacity-90 -ml-4"></div>
+                          <div className="flex items-center">
+                            <div className="w-11 h-11 rounded-full bg-[#EB001B] shadow-lg"></div>
+                            <div className="w-11 h-11 rounded-full bg-[#FF5F00] shadow-lg -ml-5"></div>
                           </div>
                         )}
                       </div>
@@ -124,39 +129,39 @@ export default function Cards() {
 
                     <div className="space-y-6 mt-8">
                       <div>
-                        <p className="text-3xl font-mono font-bold tracking-[0.25em] drop-shadow-md" data-testid={`card-number-${card.id}`}>
+                        <p className="text-3xl font-mono font-bold tracking-[0.3em] drop-shadow-lg" data-testid={`card-number-${card.id}`}>
                           {card.cardNumber}
                         </p>
                       </div>
 
                       <div className="flex items-end justify-between">
                         <div className="flex-1">
-                          <p className="text-[10px] text-white/70 uppercase mb-1 tracking-wider">Cardholder</p>
-                          <p className="text-base font-semibold tracking-wider" data-testid={`cardholder-${card.id}`}>
+                          <p className="text-xs text-white/90 uppercase mb-1.5 tracking-wide font-medium">Cardholder</p>
+                          <p className="text-lg font-bold tracking-wide uppercase" data-testid={`cardholder-${card.id}`}>
                             {card.cardholderName}
                           </p>
                         </div>
                         <div className="flex gap-6">
                           <div>
-                            <p className="text-[10px] text-white/70 uppercase mb-1 tracking-wider">Expires</p>
-                            <p className="text-base font-semibold" data-testid={`expiry-${card.id}`}>
+                            <p className="text-xs text-white/90 uppercase mb-1.5 tracking-wide font-medium">Expires</p>
+                            <p className="text-lg font-bold" data-testid={`expiry-${card.id}`}>
                               {card.expiryMonth}/{card.expiryYear.slice(-2)}
                             </p>
                           </div>
                           <div>
-                            <div className="flex items-center gap-1 mb-1">
-                              <p className="text-[10px] text-white/70 uppercase tracking-wider">CVV</p>
+                            <div className="flex items-center gap-1.5 mb-1.5">
+                              <p className="text-xs text-white/90 uppercase tracking-wide font-medium">CVV</p>
                               <Button
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => toggleCVV(card.id)}
-                                className="h-5 w-5 p-0 text-white/70 hover:text-white hover:bg-white/10"
+                                className="h-5 w-5 p-0 text-white/90 hover:text-white hover:bg-white/20"
                                 data-testid={`button-toggle-cvv-${card.id}`}
                               >
-                                {showCVV[card.id] ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
+                                {showCVV[card.id] ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                               </Button>
                             </div>
-                            <p className="text-base font-mono font-bold" data-testid={`cvv-${card.id}`}>
+                            <p className="text-lg font-mono font-bold" data-testid={`cvv-${card.id}`}>
                               {showCVV[card.id] ? card.cvv : '•••'}
                             </p>
                           </div>

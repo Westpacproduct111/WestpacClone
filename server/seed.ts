@@ -66,7 +66,7 @@ async function seed() {
       accountType: "Business",
       balance: "0.00",
       currency: "AUD",
-      bsb: "034-156",
+      bsb: "734-117",
     }).returning();
 
     console.log("✅ Business account created:", businessAccount.accountNumber, "- Balance: $0");
@@ -268,7 +268,7 @@ async function seed() {
     console.log("   Password: RyanJames15102003");
     console.log("   Checking Account (BSB: 034-089): 368274 - $720,000.00 AUD");
     console.log("   Savings Account (BSB: 034-089): 529483 - $150,000.00 AUD");
-    console.log("   Business Account (BSB: 034-156): 781046 - $0.00 AUD");
+    console.log("   Business Account (BSB: 734-117): 781046 - $0.00 AUD");
     console.log(`   Total Transactions: ${allTransactions.length}`);
     console.log("   Debit Cards: 2");
     console.log("   Admin: unitedhome2016@yahoo.com");
