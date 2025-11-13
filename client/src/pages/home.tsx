@@ -12,6 +12,7 @@ import propertyCostsImage from "@assets/investment-property-costs.jpg";
 import businessFinanceImage from "@assets/generated_images/Business_finance_meeting_guide_61c0e275.png";
 import businessBankingImage from "@assets/generated_images/Business_banking_startup_workspace_159b163f.png";
 import weaveImage from "@assets/generated_images/Indigenous_weave_pattern_banner_599100b2.png";
+import appImage from "@assets/westpac_app.jpg";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -420,47 +421,12 @@ export default function Home() {
             {/* Phone Mockup - Left Side */}
             <div className="flex justify-center lg:justify-start order-2 lg:order-1">
               <div className="relative">
-                <div className="w-[280px] bg-[#4A3F6B] rounded-[40px] p-4 shadow-2xl">
-                  <div className="bg-white rounded-[32px] p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-xs font-medium">9:41</span>
-                      <div className="flex gap-1">
-                        <div className="w-4 h-3 bg-foreground/80 rounded-sm"></div>
-                        <div className="w-4 h-3 bg-foreground/80 rounded-sm"></div>
-                        <div className="w-4 h-3 bg-foreground/80 rounded-sm"></div>
-                      </div>
-                    </div>
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-semibold">Cash flow</span>
-                        <span className="text-xs text-[#DA1710]">Filter</span>
-                      </div>
-                      <div className="h-32 flex items-end gap-2">
-                        <div className="flex-1 flex flex-col gap-1">
-                          <div className="h-16 bg-[#2C2C2C] rounded-sm"></div>
-                          <div className="h-10 bg-[#DA1710] rounded-sm"></div>
-                        </div>
-                        <div className="flex-1 flex flex-col gap-1">
-                          <div className="h-20 bg-[#2C2C2C] rounded-sm"></div>
-                          <div className="h-8 bg-[#DA1710] rounded-sm"></div>
-                        </div>
-                        <div className="flex-1 flex flex-col gap-1">
-                          <div className="h-24 bg-[#2C2C2C] rounded-sm"></div>
-                          <div className="h-12 bg-[#DA1710] rounded-sm"></div>
-                        </div>
-                        <div className="flex-1 flex flex-col gap-1">
-                          <div className="h-20 bg-[#2C2C2C] rounded-sm"></div>
-                          <div className="h-10 bg-[#DA1710] rounded-sm"></div>
-                        </div>
-                      </div>
-                      <div className="text-center pt-4 border-t">
-                        <p className="text-xs text-muted-foreground mb-1">September 2024</p>
-                        <p className="text-lg font-bold">$3,028.15</p>
-                        <p className="text-xs text-muted-foreground">From eligible accounts</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <img 
+                  src={appImage} 
+                  alt="Westpac mobile banking app showing cash flow features" 
+                  className="w-full max-w-md h-auto rounded-md shadow-2xl"
+                  data-testid="img-banking-app"
+                />
               </div>
             </div>
 
