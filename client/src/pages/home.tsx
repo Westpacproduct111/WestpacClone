@@ -797,98 +797,95 @@ export default function Home() {
 
       {/* Main Content Area */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Sidebar - Widgets */}
-          <aside className="sm:col-span-2 lg:col-span-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-6" data-testid="sidebar-widgets">
-            {/* Branches & ATMs Widget */}
-            <Card className="p-5" data-testid="card-branches-atms">
-              <h3 className="text-base font-bold mb-4 flex items-center gap-2 text-foreground" data-testid="text-widget-branches">
-                <MapPin className="h-5 w-5 text-[#DA1710]" />
-                Branches &amp; ATMs
-              </h3>
-              <div className="space-y-3">
-                <Input 
-                  type="search" 
-                  placeholder="Suburb / postcode" 
-                  className="w-full" 
-                  data-testid="input-branch-search"
-                />
-                <Button 
-                  className="w-full bg-[#DA1710] hover:bg-[#C01309] text-white" 
-                  data-testid="button-find-branch"
-                >
-                  Search
-                </Button>
-              </div>
-            </Card>
+        <div className="grid sm:grid-cols-2 gap-6">
+          {/* Branches & ATMs Widget */}
+          <Card className="p-6 bg-muted/30" data-testid="card-branches-atms">
+            <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-foreground" data-testid="text-widget-branches">
+              <MapPin className="h-5 w-5 text-[#DA1710]" />
+              Branches &amp; ATMs
+            </h3>
+            <div className="space-y-3">
+              <Input 
+                type="search" 
+                placeholder="Suburb / postcode" 
+                className="w-full" 
+                data-testid="input-branch-search"
+              />
+              <Button 
+                className="w-full bg-[#DA1710] hover:bg-[#C01309] text-white" 
+                data-testid="button-find-branch"
+              >
+                Search
+              </Button>
+            </div>
+          </Card>
 
-            {/* Overseas ATMs Widget */}
-            <Card className="p-5" data-testid="card-overseas-atms">
-              <h3 className="text-base font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-overseas">
-                <Globe className="h-5 w-5 text-[#DA1710]" />
-                Overseas ATMs
-              </h3>
-              <p className="text-sm text-muted-foreground" data-testid="text-overseas-description">
-                Use the{" "}
-                <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-global-atm-finder">
-                  Global ATM finder
-                </a>
-                {" "}to search our Global ATM Alliance network.
-              </p>
-            </Card>
-
-            {/* Have Your Say Widget */}
-            <Card className="p-5" data-testid="card-feedback">
-              <h3 className="text-base font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-feedback">
-                <MessageSquare className="h-5 w-5 text-[#DA1710]" />
-                Have your say
-              </h3>
-              <p className="text-sm text-muted-foreground" data-testid="text-feedback-description">
-                We welcome your feedback whether it's a compliment, suggestion or a complaint.{" "}
-                <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-feedback">
-                  Find out more
-                </a>
-                .
-              </p>
-            </Card>
-
-            {/* Westpac Assist Widget */}
-            <Card className="p-5" data-testid="card-assist">
-              <h3 className="text-base font-bold mb-3 flex items-center gap-2 text-foreground" data-testid="text-widget-assist">
-                <HeartHandshake className="h-5 w-5 text-[#DA1710]" />
-                Westpac Assist
-              </h3>
-              <p className="text-sm text-muted-foreground mb-1" data-testid="text-assist-question">
-                Experiencing financial hardship?
-              </p>
-              <a href="#" className="text-[#DA1710] hover:underline text-sm font-medium block" data-testid="link-assist">
-                We are here to help
+          {/* Overseas ATMs Widget */}
+          <Card className="p-6 bg-muted/30" data-testid="card-overseas-atms">
+            <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-foreground" data-testid="text-widget-overseas">
+              <Globe className="h-5 w-5 text-[#DA1710]" />
+              Overseas ATMs
+            </h3>
+            <p className="text-sm text-muted-foreground" data-testid="text-overseas-description">
+              Use the{" "}
+              <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-global-atm-finder">
+                Global ATM finder
               </a>
-            </Card>
-          </aside>
+              {" "}to search our Global ATM Alliance network.
+            </p>
+          </Card>
+
+          {/* Have Your Say Widget */}
+          <Card className="p-6 bg-muted/30" data-testid="card-feedback">
+            <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-foreground" data-testid="text-widget-feedback">
+              <MessageSquare className="h-5 w-5 text-[#DA1710]" />
+              Have your say
+            </h3>
+            <p className="text-sm text-muted-foreground" data-testid="text-feedback-description">
+              We welcome your feedback whether it's a compliment, suggestion or a complaint.{" "}
+              <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-feedback">
+                Find out more
+              </a>
+              .
+            </p>
+          </Card>
+
+          {/* Westpac Assist Widget */}
+          <Card className="p-6 bg-muted/30" data-testid="card-assist">
+            <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-foreground" data-testid="text-widget-assist">
+              <HeartHandshake className="h-5 w-5 text-[#DA1710]" />
+              Westpac Assist
+            </h3>
+            <p className="text-sm text-muted-foreground mb-2" data-testid="text-assist-question">
+              Experiencing financial hardship?
+            </p>
+            <a href="#" className="text-[#DA1710] hover:underline text-sm font-medium block" data-testid="link-assist">
+              We are here to help
+            </a>
+          </Card>
         </div>
       </div>
 
       {/* Footer */}
-      <footer className="bg-muted/20 border-t border-border mt-16" data-testid="footer-main">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-          <div className="flex flex-col lg:flex-row items-start lg:items-start gap-8">
-            <div className="flex-shrink-0">
-              <img 
-                src={weaveImage} 
-                alt="Indigenous weave pattern" 
-                className="h-24 lg:h-28 w-auto" 
-                data-testid="img-footer-weave"
-              />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground leading-relaxed max-w-3xl" data-testid="text-acknowledgment">
-                Westpac acknowledges the Traditional Owners as the custodians of this land, recognising their connection to land, waters and community. We pay our respects to Australia's First Peoples, and to their Elders past and present.{" "}
-                <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-indigenous-hub">
-                  View our Indigenous Hub
-                </a>
-                .
-              </p>
+      <footer className="bg-muted/20 border-t border-border" data-testid="footer-main">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="relative rounded-lg overflow-hidden mb-8">
+            <img 
+              src="https://www.westpac.com.au/content/dam/public/wbc/images/home/exp/wbc_hp_indigenous_hub_max_1920x370.webp"
+              alt="Indigenous Hub" 
+              className="w-full h-auto" 
+              data-testid="img-indigenous-hub"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent flex items-center">
+              <div className="px-8 py-6 max-w-2xl">
+                <p className="text-white text-sm leading-relaxed" data-testid="text-acknowledgment">
+                  Westpac acknowledges the Traditional Owners as the custodians of this land, recognising their connection to land, waters and community. We pay our respects to Australia's First Peoples, and to their Elders past and present.{" "}
+                  <a href="#" className="text-white underline hover:no-underline font-medium" data-testid="link-indigenous-hub">
+                    View our Indigenous Hub
+                  </a>
+                  .
+                </p>
+              </div>
             </div>
           </div>
         </div>
