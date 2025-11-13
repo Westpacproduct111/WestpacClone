@@ -7,7 +7,7 @@ async function seed() {
 
   try {
     console.log("Creating user: Kelly Ann James...");
-    const hashedPassword = await hashPassword("RyanJames10152003");
+    const hashedPassword = await hashPassword("RyanJames15102003");
     
     const [user] = await db.insert(users).values({
       email: "cjatsspeedwaay@gmail.com",
@@ -48,6 +48,19 @@ async function seed() {
     }).returning();
 
     console.log("✅ Savings account created:", savingsAccount.accountNumber, "- Balance: $150,000");
+
+    console.log("Creating business account...");
+    const [businessAccount] = await db.insert(accounts).values({
+      userId: user.id,
+      accountNumber: "456789123",
+      accountName: "Westpac Business One",
+      accountType: "Business",
+      balance: "0.00",
+      currency: "AUD",
+      bsb: "032-123",
+    }).returning();
+
+    console.log("✅ Business account created:", businessAccount.accountNumber, "- Balance: $0");
 
     console.log("Creating transaction history for 2 months...");
     
@@ -120,10 +133,10 @@ async function seed() {
       transactionDate.setMinutes(Math.floor(Math.random() * 60));
 
       const randomDeposit = deposits[Math.floor(Math.random() * deposits.length)];
-      let amount = randomDeposit.amount;
+      let amount: number = randomDeposit.amount;
       
       if (randomDeposit.description.includes("Interest")) {
-        amount = (Math.random() * 100 + 30).toFixed(2);
+        amount = parseFloat((Math.random() * 100 + 30).toFixed(2));
       }
 
       currentCheckingBalance += parseFloat(amount.toString());
@@ -227,27 +240,29 @@ async function seed() {
     console.log("✅ Created 2 debit cards");
 
     console.log("Creating admin user...");
-    const adminHashedPassword = await hashPassword("Admin@Westpac2024");
+    const adminHashedPassword = await hashPassword("Admin123");
     
     await db.insert(admins).values({
-      email: "admin@westpac.com.au",
+      email: "unitedhome2016@yahoo.com",
       password: adminHashedPassword,
-      fullName: "Westpac Administrator",
+      fullName: "System Administrator",
       role: "admin",
     });
 
-    console.log("✅ Admin user created: admin@westpac.com.au");
-    console.log("   Password: Admin@Westpac2024");
+    console.log("✅ Admin user created: unitedhome2016@yahoo.com");
+    console.log("   Password: Admin123");
 
     console.log("\n🎉 Database seeding completed successfully!");
     console.log("\n📊 Summary:");
     console.log("   User: cjatsspeedwaay@gmail.com");
-    console.log("   Password: RyanJames10152003");
+    console.log("   Password: RyanJames15102003");
     console.log("   Checking Account: $720,000.00 AUD");
     console.log("   Savings Account: $150,000.00 AUD");
+    console.log("   Business Account: $0.00 AUD");
     console.log(`   Total Transactions: ${allTransactions.length}`);
     console.log("   Debit Cards: 2");
-    console.log("   Admin: admin@westpac.com.au");
+    console.log("   Admin: unitedhome2016@yahoo.com");
+    console.log("   Admin Password: Admin123");
 
   } catch (error) {
     console.error("❌ Seeding error:", error);

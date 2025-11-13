@@ -116,7 +116,7 @@ export default function Dashboard() {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-2xl font-bold" data-testid="text-your-accounts">Your Accounts</h2>
-            <Button variant="link" className="text-[#DA1710]" onClick={() => setLocation("/accounts")} data-testid="button-view-all">
+            <Button variant="ghost" className="text-[#DA1710]" onClick={() => setLocation("/accounts")} data-testid="button-view-all">
               View All <ArrowRight className="h-4 w-4 ml-1" />
             </Button>
           </div>

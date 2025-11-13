@@ -2,7 +2,7 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { authenticateUser, authenticateAdmin } from "./auth";
-import { updateUserPhoneSchema } from "@shared/schema";
+import { updateUserPhoneSchema, transferFundsSchema, insertPayeeSchema } from "@shared/schema";
 
 declare module "express-session" {
   interface SessionData {
@@ -270,6 +270,290 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Get stats error:", error);
       return res.status(500).json({ error: "Failed to get stats" });
+    }
+  });
+
+  app.get("/api/payees", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const payees = await storage.getPayeesByUserId(req.session.userId);
+      return res.json({ payees });
+    } catch (error) {
+      console.error("Get payees error:", error);
+      return res.status(500).json({ error: "Failed to get payees" });
+    }
+  });
+
+  app.post("/api/payees", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const result = insertPayeeSchema.safeParse({ ...req.body, userId: req.session.userId });
+      
+      if (!result.success) {
+        return res.status(400).json({ error: result.error.issues[0].message });
+      }
+
+      const payee = await storage.createPayee(result.data);
+      return res.json({ payee });
+    } catch (error) {
+      console.error("Create payee error:", error);
+      return res.status(500).json({ error: "Failed to create payee" });
+    }
+  });
+
+  app.delete("/api/payees/:id", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      await storage.deletePayee(req.params.id);
+      return res.json({ message: "Payee deleted successfully" });
+    } catch (error) {
+      console.error("Delete payee error:", error);
+      return res.status(500).json({ error: "Failed to delete payee" });
+    }
+  });
+
+  app.post("/api/transfers", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const result = transferFundsSchema.safeParse(req.body);
+      
+      if (!result.success) {
+        return res.status(400).json({ error: result.error.issues[0].message });
+      }
+
+      const fromAccount = await storage.getAccountById(result.data.fromAccountId);
+      
+      if (!fromAccount || fromAccount.userId !== req.session.userId) {
+        return res.status(403).json({ error: "Access denied to source account" });
+      }
+
+      const transferAmount = parseFloat(result.data.amount);
+      if (isNaN(transferAmount) || transferAmount <= 0) {
+        return res.status(400).json({ error: "Invalid transfer amount" });
+      }
+
+      const currentBalance = parseFloat(fromAccount.balance);
+
+      if (currentBalance < transferAmount) {
+        return res.status(400).json({ error: "Insufficient funds" });
+      }
+
+      if (result.data.transferType === 'internal') {
+        if (!result.data.toAccountId) {
+          return res.status(400).json({ error: "Destination account is required for internal transfers" });
+        }
+        
+        const toAccount = await storage.getAccountById(result.data.toAccountId);
+        
+        if (!toAccount) {
+          return res.status(404).json({ error: "Destination account not found" });
+        }
+
+        if (toAccount.userId !== req.session.userId) {
+          return res.status(403).json({ error: "Access denied to destination account" });
+        }
+
+        if (fromAccount.id === toAccount.id) {
+          return res.status(400).json({ error: "Cannot transfer to the same account" });
+        }
+
+        const transfer = await storage.executeInternalTransfer({
+          fromAccountId: fromAccount.id,
+          toAccountId: toAccount.id,
+          amount: result.data.amount,
+          description: result.data.description,
+          fromAccountName: fromAccount.accountName,
+        });
+
+        return res.json({ transfer, message: "Transfer completed successfully" });
+      } else {
+        if (!result.data.toAccountNumber || !result.data.toBsb) {
+          return res.status(400).json({ error: "Account number and BSB are required for external transfers" });
+        }
+
+        const newFromBalance = (currentBalance - transferAmount).toFixed(2);
+        await storage.updateAccountBalance(fromAccount.id, newFromBalance);
+
+        await storage.createTransaction({
+          accountId: fromAccount.id,
+          type: "debit",
+          amount: `-${result.data.amount}`,
+          description: result.data.description,
+          merchant: null,
+          category: "Transfer",
+          balanceAfter: newFromBalance,
+          transactionDate: new Date(),
+        });
+
+        const transfer = await storage.createTransfer({
+          fromAccountId: result.data.fromAccountId,
+          toAccountId: null,
+          toAccountNumber: result.data.toAccountNumber,
+          toBsb: result.data.toBsb,
+          amount: result.data.amount,
+          description: result.data.description,
+          status: "completed",
+          transferType: result.data.transferType,
+        });
+
+        return res.json({ transfer, message: "Transfer completed successfully" });
+      }
+    } catch (error) {
+      console.error("Transfer error:", error);
+      return res.status(500).json({ error: "Failed to complete transfer" });
+    }
+  });
+
+  app.get("/api/transfers", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.userId) {
+        return res.status(401).json({ error: "Not authenticated" });
+      }
+
+      const accounts = await storage.getAccountsByUserId(req.session.userId);
+      const allTransfers = [];
+
+      for (const account of accounts) {
+        const transfers = await storage.getTransfersByAccountId(account.id);
+        allTransfers.push(...transfers);
+      }
+
+      const uniqueTransfers = Array.from(new Map(allTransfers.map(t => [t.id, t])).values());
+
+      return res.json({ transfers: uniqueTransfers });
+    } catch (error) {
+      console.error("Get transfers error:", error);
+      return res.status(500).json({ error: "Failed to get transfers" });
+    }
+  });
+
+  app.get("/api/admin/users/:id", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.adminId) {
+        return res.status(401).json({ error: "Not authenticated as admin" });
+      }
+
+      const user = await storage.getUserById(req.params.id);
+      
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      const { password: _, ...userWithoutPassword } = user;
+      const accounts = await storage.getAccountsByUserId(user.id);
+      
+      return res.json({ user: userWithoutPassword, accounts });
+    } catch (error) {
+      console.error("Get user error:", error);
+      return res.status(500).json({ error: "Failed to get user" });
+    }
+  });
+
+  app.get("/api/admin/transactions", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.adminId) {
+        return res.status(401).json({ error: "Not authenticated as admin" });
+      }
+
+      const limit = req.query.limit ? parseInt(req.query.limit as string) : 100;
+      const transactions = await storage.getAllTransactions(limit);
+      
+      return res.json({ transactions });
+    } catch (error) {
+      console.error("Get transactions error:", error);
+      return res.status(500).json({ error: "Failed to get transactions" });
+    }
+  });
+
+  app.get("/api/admin/transfers", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.adminId) {
+        return res.status(401).json({ error: "Not authenticated as admin" });
+      }
+
+      const transfers = await storage.getAllTransfers();
+      return res.json({ transfers });
+    } catch (error) {
+      console.error("Get transfers error:", error);
+      return res.status(500).json({ error: "Failed to get transfers" });
+    }
+  });
+
+  app.get("/api/admin/cards", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.adminId) {
+        return res.status(401).json({ error: "Not authenticated as admin" });
+      }
+
+      const cards = await storage.getAllDebitCards();
+      return res.json({ cards });
+    } catch (error) {
+      console.error("Get cards error:", error);
+      return res.status(500).json({ error: "Failed to get cards" });
+    }
+  });
+
+  app.patch("/api/admin/cards/:id/status", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.adminId) {
+        return res.status(401).json({ error: "Not authenticated as admin" });
+      }
+
+      const { status } = req.body;
+      
+      if (!status) {
+        return res.status(400).json({ error: "Status is required" });
+      }
+
+      const card = await storage.updateDebitCardStatus(req.params.id, status);
+      
+      if (!card) {
+        return res.status(404).json({ error: "Card not found" });
+      }
+
+      return res.json({ card, message: "Card status updated successfully" });
+    } catch (error) {
+      console.error("Update card status error:", error);
+      return res.status(500).json({ error: "Failed to update card status" });
+    }
+  });
+
+  app.patch("/api/admin/accounts/:id/balance", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.adminId) {
+        return res.status(401).json({ error: "Not authenticated as admin" });
+      }
+
+      const { balance } = req.body;
+      
+      if (!balance) {
+        return res.status(400).json({ error: "Balance is required" });
+      }
+
+      const account = await storage.getAccountById(req.params.id);
+      
+      if (!account) {
+        return res.status(404).json({ error: "Account not found" });
+      }
+
+      const updatedAccount = await storage.updateAccountBalance(req.params.id, balance);
+      
+      return res.json({ account: updatedAccount, message: "Balance updated successfully" });
+    } catch (error) {
+      console.error("Update balance error:", error);
+      return res.status(500).json({ error: "Failed to update balance" });
     }
   });
 

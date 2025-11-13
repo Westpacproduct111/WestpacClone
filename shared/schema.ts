@@ -64,6 +64,29 @@ export const admins = pgTable("admins", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+export const payees = pgTable("payees", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  accountNumber: text("account_number").notNull(),
+  bsb: text("bsb").notNull(),
+  nickname: text("nickname"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const transfers = pgTable("transfers", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  fromAccountId: varchar("from_account_id").notNull().references(() => accounts.id, { onDelete: "cascade" }),
+  toAccountId: varchar("to_account_id").references(() => accounts.id, { onDelete: "cascade" }),
+  toAccountNumber: text("to_account_number"),
+  toBsb: text("to_bsb"),
+  amount: decimal("amount", { precision: 15, scale: 2 }).notNull(),
+  description: text("description").notNull(),
+  status: text("status").notNull().default('completed'),
+  transferType: text("transfer_type").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const insertUserSchema = createInsertSchema(users).omit({
   id: true,
   createdAt: true,
@@ -89,8 +112,39 @@ export const insertAdminSchema = createInsertSchema(admins).omit({
   createdAt: true,
 });
 
+export const insertPayeeSchema = createInsertSchema(payees).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertTransferSchema = createInsertSchema(transfers).omit({
+  id: true,
+  createdAt: true,
+});
+
 export const updateUserPhoneSchema = z.object({
   phoneNumber: z.string().min(10, "Phone number must be at least 10 digits"),
+});
+
+export const transferFundsSchema = z.object({
+  fromAccountId: z.string().min(1, "From account is required"),
+  toAccountId: z.string().optional(),
+  toAccountNumber: z.string().optional(),
+  toBsb: z.string().optional(),
+  amount: z.string().min(1, "Amount is required").refine((val) => parseFloat(val) > 0, "Amount must be greater than 0"),
+  description: z.string().min(1, "Description is required"),
+  transferType: z.enum(['internal', 'external']),
+}).refine((data) => {
+  if (data.transferType === 'internal') {
+    return data.toAccountId && data.toAccountId.length > 0;
+  }
+  if (data.transferType === 'external') {
+    return data.toAccountNumber && data.toAccountNumber.length > 0 && data.toBsb && data.toBsb.length > 0;
+  }
+  return true;
+}, {
+  message: "For internal transfers, destination account is required. For external transfers, account number and BSB are required.",
+  path: ["toAccountId"],
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
@@ -108,4 +162,11 @@ export type DebitCard = typeof debitCards.$inferSelect;
 export type InsertAdmin = z.infer<typeof insertAdminSchema>;
 export type Admin = typeof admins.$inferSelect;
 
+export type InsertPayee = z.infer<typeof insertPayeeSchema>;
+export type Payee = typeof payees.$inferSelect;
+
+export type InsertTransfer = z.infer<typeof insertTransferSchema>;
+export type Transfer = typeof transfers.$inferSelect;
+
 export type UpdateUserPhone = z.infer<typeof updateUserPhoneSchema>;
+export type TransferFunds = z.infer<typeof transferFundsSchema>;
