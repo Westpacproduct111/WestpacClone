@@ -1,14 +1,21 @@
 import express, { type Request, Response, NextFunction } from "express";
 import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
+import cors from "cors";
 import { pool } from "../db";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
 
-// Trust proxy for Replit environment
+// Trust proxy for Replit environment - CRITICAL for HTTPS detection
 app.set('trust proxy', 1);
+
+// CORS configuration - Allow credentials from any origin for development
+app.use(cors({
+  origin: true, // Reflects the request origin
+  credentials: true, // Allow cookies
+}));
 
 declare module 'http' {
   interface IncomingMessage {
