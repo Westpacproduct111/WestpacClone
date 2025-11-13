@@ -798,43 +798,6 @@ export default function Home() {
       {/* Main Content Area */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid sm:grid-cols-2 gap-6">
-          {/* Branches & ATMs Widget */}
-          <Card className="p-6 bg-muted/30" data-testid="card-branches-atms">
-            <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-foreground" data-testid="text-widget-branches">
-              <MapPin className="h-5 w-5 text-[#DA1710]" />
-              Branches &amp; ATMs
-            </h3>
-            <div className="space-y-3">
-              <Input 
-                type="search" 
-                placeholder="Suburb / postcode" 
-                className="w-full" 
-                data-testid="input-branch-search"
-              />
-              <Button 
-                className="w-full bg-[#DA1710] hover:bg-[#C01309] text-white" 
-                data-testid="button-find-branch"
-              >
-                Search
-              </Button>
-            </div>
-          </Card>
-
-          {/* Overseas ATMs Widget */}
-          <Card className="p-6 bg-muted/30" data-testid="card-overseas-atms">
-            <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-foreground" data-testid="text-widget-overseas">
-              <Globe className="h-5 w-5 text-[#DA1710]" />
-              Overseas ATMs
-            </h3>
-            <p className="text-sm text-muted-foreground" data-testid="text-overseas-description">
-              Use the{" "}
-              <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-global-atm-finder">
-                Global ATM finder
-              </a>
-              {" "}to search our Global ATM Alliance network.
-            </p>
-          </Card>
-
           {/* Have Your Say Widget */}
           <Card className="p-6 bg-muted/30" data-testid="card-feedback">
             <h3 className="text-lg font-bold mb-4 flex items-center gap-2 text-foreground" data-testid="text-widget-feedback">
@@ -867,26 +830,131 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-muted/20 border-t border-border" data-testid="footer-main">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="relative rounded-lg overflow-hidden mb-8">
-            <img 
-              src="https://www.westpac.com.au/content/dam/public/wbc/images/home/exp/wbc_hp_indigenous_hub_max_1920x370.webp"
-              alt="Indigenous Hub" 
-              className="w-full h-auto" 
-              data-testid="img-indigenous-hub"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent flex items-center">
-              <div className="px-8 py-6 max-w-2xl">
-                <p className="text-white text-sm leading-relaxed" data-testid="text-acknowledgment">
-                  Westpac acknowledges the Traditional Owners as the custodians of this land, recognising their connection to land, waters and community. We pay our respects to Australia's First Peoples, and to their Elders past and present.{" "}
-                  <a href="#" className="text-white underline hover:no-underline font-medium" data-testid="link-indigenous-hub">
-                    View our Indigenous Hub
-                  </a>
-                  .
-                </p>
-              </div>
+      <footer className="bg-white" data-testid="footer-main">
+        {/* Indigenous Hub Banner */}
+        <div className="relative w-full">
+          <img 
+            src="https://www.westpac.com.au/content/dam/public/wbc/images/home/exp/wbc_hp_indigenous_hub_max_1920x370.webp"
+            alt="Indigenous Hub" 
+            className="w-full h-auto" 
+            data-testid="img-indigenous-hub"
+          />
+          <div className="absolute inset-0 flex items-center justify-center px-4">
+            <div className="bg-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto">
+              <p className="text-sm text-foreground leading-relaxed" data-testid="text-acknowledgment">
+                Westpac acknowledges the Traditional Owners as the custodians of this land, recognising their connection to land, waters and community. We pay our respects to Australia's First Peoples, and to their Elders past and present. View our{" "}
+                <a href="#" className="text-[#DA1710] hover:underline font-medium" data-testid="link-indigenous-hub">
+                  Indigenous Hub
+                </a>
+              </p>
             </div>
+          </div>
+        </div>
+
+        {/* Footer Links */}
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <nav className="space-y-2">
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-complaints">
+                  <ChevronRight className="h-3 w-3" />
+                  Complaints and compliments
+                </a>
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-contact">
+                  <ChevronRight className="h-3 w-3" />
+                  Contact us
+                </a>
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-careers">
+                  <ChevronRight className="h-3 w-3" />
+                  Careers
+                </a>
+              </nav>
+            </div>
+            <div>
+              <nav className="space-y-2">
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-access">
+                  <ChevronRight className="h-3 w-3" />
+                  Access and Inclusion
+                </a>
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-investor">
+                  <ChevronRight className="h-3 w-3" />
+                  Investor centre
+                </a>
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-westpac-group">
+                  <ChevronRight className="h-3 w-3" />
+                  Westpac Group
+                </a>
+              </nav>
+            </div>
+            <div>
+              <nav className="space-y-2">
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-security">
+                  <ChevronRight className="h-3 w-3" />
+                  Security
+                </a>
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-faqs">
+                  <ChevronRight className="h-3 w-3" />
+                  FAQs
+                </a>
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-privacy">
+                  <ChevronRight className="h-3 w-3" />
+                  Privacy
+                </a>
+              </nav>
+            </div>
+            <div>
+              <nav className="space-y-2">
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-website-terms">
+                  <ChevronRight className="h-3 w-3" />
+                  Website terms and conditions
+                </a>
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-terms">
+                  <ChevronRight className="h-3 w-3" />
+                  Terms and conditions
+                </a>
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-site-index">
+                  <ChevronRight className="h-3 w-3" />
+                  Site index
+                </a>
+                <a href="#" className="text-sm text-foreground hover:text-[#DA1710] flex items-center gap-1" data-testid="link-slavery">
+                  <ChevronRight className="h-3 w-3" />
+                  Modern Slavery Statement
+                </a>
+              </nav>
+            </div>
+          </div>
+
+          {/* Social Icons and Logo */}
+          <div className="flex items-center justify-between border-t border-border pt-6">
+            <div className="flex gap-3">
+              <a href="#" className="text-[#3b5998] hover:opacity-80" data-testid="link-facebook">
+                <div className="w-8 h-8 bg-[#3b5998] rounded flex items-center justify-center text-white font-bold text-xs">f</div>
+              </a>
+              <a href="#" className="text-[#000000] hover:opacity-80" data-testid="link-x">
+                <div className="w-8 h-8 bg-[#000000] rounded flex items-center justify-center text-white font-bold text-xs">X</div>
+              </a>
+              <a href="#" className="text-[#ff0000] hover:opacity-80" data-testid="link-youtube">
+                <div className="w-8 h-8 bg-[#ff0000] rounded flex items-center justify-center text-white font-bold text-xs">▶</div>
+              </a>
+              <a href="#" className="text-[#0077b5] hover:opacity-80" data-testid="link-linkedin">
+                <div className="w-8 h-8 bg-[#0077b5] rounded flex items-center justify-center text-white font-bold text-xs">in</div>
+              </a>
+              <a href="#" className="text-[#e4405f] hover:opacity-80" data-testid="link-instagram">
+                <div className="w-8 h-8 bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045] rounded flex items-center justify-center text-white font-bold text-xs">📷</div>
+              </a>
+            </div>
+            <div>
+              <img src={logoImage} alt="Westpac" className="h-8" data-testid="img-footer-logo" />
+            </div>
+          </div>
+
+          {/* Disclaimer */}
+          <div className="mt-6 pt-6 border-t border-border">
+            <p className="text-xs text-muted-foreground leading-relaxed" data-testid="text-disclaimer">
+              For Westpac-issued products, conditions, fees and charges apply. These may change or we may introduce new ones in the future. Full details are available on request. Lending criteria apply to approval of credit products. This information does not take your personal objectives, circumstances or needs into account. Consider its appropriateness to these factors before acting on it. Read the disclosure documents for your selected product or service, including the{" "}
+              <a href="#" className="text-[#DA1710] hover:underline">Terms and Conditions</a>, before deciding.{" "}
+              <a href="#" className="text-[#DA1710] hover:underline">Target Market Determinations</a> for the products are available. Unless otherwise specified, the products and services described on this website are available only in Australia from © Westpac Banking Corporation ABN 33 007 457 141 AFSL and Australian credit licence 233714.
+            </p>
           </div>
         </div>
       </footer>
