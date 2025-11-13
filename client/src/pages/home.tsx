@@ -400,7 +400,7 @@ export default function Home() {
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-insurance">
+                      <a href="https://www.westpac.com.au/personal-banking/insurance/?fid=HP:product:discover:subhead:wbc:www:pers:insurance" className="text-sm text-foreground hover:underline" data-testid="link-insurance">
                         Insurance
                       </a>
                     </li>
