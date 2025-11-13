@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { ChevronRight, MapPin, Globe, MessageSquare, HeartHandshake, Menu, Search, ChevronDown, Home as HomeIcon, CreditCard, PiggyBank } from "lucide-react";
+import { ChevronRight, MapPin, Globe, MessageSquare, HeartHandshake, Menu, Search, ChevronDown, Home as HomeIcon, CreditCard, PiggyBank, Car, Building2, MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import logoImage from "@assets/generated_images/Westpac_red_W_logo_4eaff681.png";
 import heroImage from "@assets/ruby-necklace.jpg";
@@ -218,65 +218,194 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Three Column Product Showcase */}
+      {/* Six Column Product Showcase */}
       <section className="bg-white py-12 lg:py-16 border-b border-border" data-testid="section-products-showcase">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             {/* Home Loans */}
-            <div className="text-center" data-testid="card-product-home-loans">
-              <div className="mb-4 flex justify-center">
-                <div className="w-16 h-16 rounded-full bg-[#FFE5E5] flex items-center justify-center">
-                  <HomeIcon className="w-8 h-8 text-[#DA1710]" />
+            <div className="text-left" data-testid="card-product-home-loans">
+              <div className="mb-4 flex items-start">
+                <div className="w-12 h-12 rounded-full bg-[#FFE5E5] flex items-center justify-center flex-shrink-0 mr-4">
+                  <HomeIcon className="w-6 h-6 text-[#DA1710]" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold mb-3 text-foreground" data-testid="text-product-home-title">
+                    Home loans
+                  </h3>
+                  <ul className="space-y-2">
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-compare-loans">
+                        Compare loans and rates
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-repayment-calc">
+                        Repayment calculator
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-invest-property">
+                        Invest in property
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <h3 className="text-xl lg:text-2xl font-bold mb-2 text-foreground" data-testid="text-product-home-title">
-                Home loans
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4" data-testid="text-product-home-desc">
-                Compare loans and rates
-              </p>
-              <a href="#" className="text-[#DA1710] hover:underline text-sm font-medium inline-flex items-center" data-testid="link-product-home">
-                Learn more
-                <ChevronRight className="ml-1 h-4 w-4" />
-              </a>
             </div>
 
             {/* Bank Accounts */}
-            <div className="text-center" data-testid="card-product-bank-accounts">
-              <div className="mb-4 flex justify-center">
-                <div className="w-16 h-16 rounded-full bg-[#FFE5E5] flex items-center justify-center">
-                  <PiggyBank className="w-8 h-8 text-[#DA1710]" />
+            <div className="text-left" data-testid="card-product-bank-accounts">
+              <div className="mb-4 flex items-start">
+                <div className="w-12 h-12 rounded-full bg-[#FFE5E5] flex items-center justify-center flex-shrink-0 mr-4">
+                  <PiggyBank className="w-6 h-6 text-[#DA1710]" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold mb-3 text-foreground" data-testid="text-product-bank-title">
+                    Bank accounts
+                  </h3>
+                  <ul className="space-y-2">
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-transaction-accounts">
+                        Transaction accounts
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-savings-accounts">
+                        Savings accounts
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-term-deposit">
+                        Term deposit
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <h3 className="text-xl lg:text-2xl font-bold mb-2 text-foreground" data-testid="text-product-bank-title">
-                Bank accounts
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4" data-testid="text-product-bank-desc">
-                Transaction accounts
-              </p>
-              <a href="#" className="text-[#DA1710] hover:underline text-sm font-medium inline-flex items-center" data-testid="link-product-bank">
-                Learn more
-                <ChevronRight className="ml-1 h-4 w-4" />
-              </a>
             </div>
 
             {/* Credit Cards */}
-            <div className="text-center" data-testid="card-product-credit-cards">
-              <div className="mb-4 flex justify-center">
-                <div className="w-16 h-16 rounded-full bg-[#FFE5E5] flex items-center justify-center">
-                  <CreditCard className="w-8 h-8 text-[#DA1710]" />
+            <div className="text-left" data-testid="card-product-credit-cards">
+              <div className="mb-4 flex items-start">
+                <div className="w-12 h-12 rounded-full bg-[#FFE5E5] flex items-center justify-center flex-shrink-0 mr-4">
+                  <CreditCard className="w-6 h-6 text-[#DA1710]" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold mb-3 text-foreground" data-testid="text-product-credit-title">
+                    Credit cards
+                  </h3>
+                  <ul className="space-y-2">
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-rewards-cards">
+                        Rewards credit cards
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-low-rate-cards">
+                        Low rate credit cards
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-low-fee-card">
+                        Low fee credit card
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <h3 className="text-xl lg:text-2xl font-bold mb-2 text-foreground" data-testid="text-product-credit-title">
-                Credit cards
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4" data-testid="text-product-credit-desc">
-                Rewards credit cards
-              </p>
-              <a href="#" className="text-[#DA1710] hover:underline text-sm font-medium inline-flex items-center" data-testid="link-product-credit">
-                Learn more
-                <ChevronRight className="ml-1 h-4 w-4" />
-              </a>
+            </div>
+
+            {/* Personal Loans */}
+            <div className="text-left" data-testid="card-product-personal-loans">
+              <div className="mb-4 flex items-start">
+                <div className="w-12 h-12 rounded-full bg-[#FFE5E5] flex items-center justify-center flex-shrink-0 mr-4">
+                  <Car className="w-6 h-6 text-[#DA1710]" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold mb-3 text-foreground" data-testid="text-product-personal-title">
+                    Personal loans
+                  </h3>
+                  <ul className="space-y-2">
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-debt-consolidation">
+                        Debt Consolidation
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-car-loan">
+                        Car Loan
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-personal-calc">
+                        Repayment Calculator
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Business */}
+            <div className="text-left" data-testid="card-product-business">
+              <div className="mb-4 flex items-start">
+                <div className="w-12 h-12 rounded-full bg-[#FFE5E5] flex items-center justify-center flex-shrink-0 mr-4">
+                  <Building2 className="w-6 h-6 text-[#DA1710]" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold mb-3 text-foreground" data-testid="text-product-business-title">
+                    Business
+                  </h3>
+                  <ul className="space-y-2">
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-business-accounts">
+                        Bank accounts
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-business-loans">
+                        Business loans
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-eftpos">
+                        EFTPOS & eCommerce
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* More Options */}
+            <div className="text-left" data-testid="card-product-more-options">
+              <div className="mb-4 flex items-start">
+                <div className="w-12 h-12 rounded-full bg-[#FFE5E5] flex items-center justify-center flex-shrink-0 mr-4">
+                  <MoreHorizontal className="w-6 h-6 text-[#DA1710]" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold mb-3 text-foreground" data-testid="text-product-more-title">
+                    More options
+                  </h3>
+                  <ul className="space-y-2">
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-share-trading">
+                        Share trading
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-insurance">
+                        Insurance
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-international">
+                        International & Travel
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
