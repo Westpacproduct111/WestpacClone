@@ -11,10 +11,18 @@ const app = express();
 // Trust proxy for Replit environment - CRITICAL for HTTPS detection
 app.set('trust proxy', 1);
 
-// CORS configuration - Allow credentials from any origin for development
+// CORS configuration - CRITICAL for cross-browser/incognito login
 app.use(cors({
-  origin: true, // Reflects the request origin
-  credentials: true, // Allow cookies
+  origin: function (origin, callback) {
+    // Allow all origins for development
+    callback(null, true);
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  exposedHeaders: ['Set-Cookie'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
 
 declare module 'http' {
