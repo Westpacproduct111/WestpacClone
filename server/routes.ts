@@ -557,6 +557,120 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.patch("/api/admin/users/:id/lock", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.adminId) {
+        return res.status(401).json({ error: "Not authenticated as admin" });
+      }
+
+      const { lock } = req.body;
+      
+      if (typeof lock !== 'boolean') {
+        return res.status(400).json({ error: "Lock must be a boolean" });
+      }
+
+      const user = await storage.updateUserLock(req.params.id, lock);
+      
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      const { password: _, ...userWithoutPassword } = user;
+      return res.json({ user: userWithoutPassword, message: lock ? "User locked successfully" : "User unlocked successfully" });
+    } catch (error) {
+      console.error("Update user lock error:", error);
+      return res.status(500).json({ error: "Failed to update user lock status" });
+    }
+  });
+
+  app.patch("/api/admin/accounts/:id/block", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.adminId) {
+        return res.status(401).json({ error: "Not authenticated as admin" });
+      }
+
+      const { block } = req.body;
+      
+      if (typeof block !== 'boolean') {
+        return res.status(400).json({ error: "Block must be a boolean" });
+      }
+
+      const account = await storage.updateAccountBlock(req.params.id, block);
+      
+      if (!account) {
+        return res.status(404).json({ error: "Account not found" });
+      }
+
+      return res.json({ account, message: block ? "Account blocked successfully" : "Account unblocked successfully" });
+    } catch (error) {
+      console.error("Update account block error:", error);
+      return res.status(500).json({ error: "Failed to update account block status" });
+    }
+  });
+
+  app.patch("/api/admin/transactions/:id/hold", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.adminId) {
+        return res.status(401).json({ error: "Not authenticated as admin" });
+      }
+
+      const { hold } = req.body;
+      
+      if (typeof hold !== 'boolean') {
+        return res.status(400).json({ error: "Hold must be a boolean" });
+      }
+
+      const transaction = await storage.updateTransactionHold(req.params.id, hold);
+      
+      if (!transaction) {
+        return res.status(404).json({ error: "Transaction not found" });
+      }
+
+      return res.json({ transaction, message: hold ? "Transaction put on hold" : "Hold released successfully" });
+    } catch (error) {
+      console.error("Update transaction hold error:", error);
+      return res.status(500).json({ error: "Failed to update transaction hold status" });
+    }
+  });
+
+  app.post("/api/admin/accounts/:id/adjust", async (req: Request, res: Response) => {
+    try {
+      if (!req.session.adminId) {
+        return res.status(401).json({ error: "Not authenticated as admin" });
+      }
+
+      const { amount, type } = req.body;
+      
+      if (!amount || !type) {
+        return res.status(400).json({ error: "Amount and type are required" });
+      }
+
+      if (type !== 'credit' && type !== 'debit') {
+        return res.status(400).json({ error: "Type must be 'credit' or 'debit'" });
+      }
+
+      const parsedAmount = parseFloat(amount);
+      if (isNaN(parsedAmount) || parsedAmount <= 0) {
+        return res.status(400).json({ error: "Amount must be a positive number" });
+      }
+
+      const description = `Admin ${type} - Manual adjustment`;
+      const account = await storage.adjustAccountBalance(req.params.id, amount, type, description);
+      
+      if (!account) {
+        return res.status(404).json({ error: "Account not found" });
+      }
+
+      return res.json({ account, message: `Account ${type}ed successfully` });
+    } catch (error: any) {
+      console.error("Adjust balance error:", error);
+      if (error.message === "Insufficient funds") {
+        return res.status(400).json({ error: "Insufficient funds for debit" });
+      }
+      return res.status(500).json({ error: "Failed to adjust account balance" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

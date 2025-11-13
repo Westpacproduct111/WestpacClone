@@ -47,22 +47,55 @@ export interface IStorage {
     description: string;
     fromAccountName: string;
   }): Promise<Transfer>;
+  
+  updateUserLock(userId: string, lock: boolean): Promise<User | undefined>;
+  updateAccountBlock(accountId: string, block: boolean): Promise<Account | undefined>;
+  updateTransactionHold(transactionId: string, hold: boolean): Promise<Transaction | undefined>;
+  adjustAccountBalance(accountId: string, amount: string, type: 'credit' | 'debit', description: string): Promise<Account | undefined>;
+}
+
+// Helper functions to normalize boolean strings to actual booleans
+function normalizeUser(user: any): User {
+  const isLocked = user.isLocked === true || user.isLocked === 'true';
+  return {
+    ...user,
+    isLocked,
+    lockedAt: isLocked ? user.lockedAt : null
+  };
+}
+
+function normalizeAccount(account: any): Account {
+  const isBlocked = account.isBlocked === true || account.isBlocked === 'true';
+  return {
+    ...account,
+    isBlocked,
+    blockedAt: isBlocked ? account.blockedAt : null
+  };
+}
+
+function normalizeTransaction(transaction: any): Transaction {
+  const isOnHold = transaction.isOnHold === true || transaction.isOnHold === 'true';
+  return {
+    ...transaction,
+    isOnHold,
+    holdReason: isOnHold ? transaction.holdReason : null
+  };
 }
 
 export class DatabaseStorage implements IStorage {
   async getUserByEmail(email: string): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
-    return user;
+    return user ? normalizeUser(user) : undefined;
   }
 
   async getUserById(id: string): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id)).limit(1);
-    return user;
+    return user ? normalizeUser(user) : undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const [user] = await db.insert(users).values(insertUser).returning();
-    return user;
+    return normalizeUser(user);
   }
 
   async updateUserPhone(userId: string, phoneNumber: string): Promise<User | undefined> {
@@ -70,7 +103,7 @@ export class DatabaseStorage implements IStorage {
       .set({ phoneNumber })
       .where(eq(users.id, userId))
       .returning();
-    return user;
+    return user ? normalizeUser(user) : undefined;
   }
 
   async updateUser(userId: string, updates: Partial<InsertUser>): Promise<User | undefined> {
@@ -78,7 +111,7 @@ export class DatabaseStorage implements IStorage {
       .set(updates)
       .where(eq(users.id, userId))
       .returning();
-    return user;
+    return user ? normalizeUser(user) : undefined;
   }
 
   async deleteUser(userId: string): Promise<void> {
@@ -86,17 +119,18 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getAccountsByUserId(userId: string): Promise<Account[]> {
-    return db.select().from(accounts).where(eq(accounts.userId, userId));
+    const userAccounts = await db.select().from(accounts).where(eq(accounts.userId, userId));
+    return userAccounts.map(normalizeAccount);
   }
 
   async getAccountById(id: string): Promise<Account | undefined> {
     const [account] = await db.select().from(accounts).where(eq(accounts.id, id)).limit(1);
-    return account;
+    return account ? normalizeAccount(account) : undefined;
   }
 
   async createAccount(insertAccount: InsertAccount): Promise<Account> {
     const [account] = await db.insert(accounts).values(insertAccount).returning();
-    return account;
+    return normalizeAccount(account);
   }
 
   async updateAccountBalance(accountId: string, newBalance: string): Promise<Account | undefined> {
@@ -104,7 +138,7 @@ export class DatabaseStorage implements IStorage {
       .set({ balance: newBalance })
       .where(eq(accounts.id, accountId))
       .returning();
-    return account;
+    return account ? normalizeAccount(account) : undefined;
   }
 
   async deleteAccount(accountId: string): Promise<void> {
@@ -116,23 +150,19 @@ export class DatabaseStorage implements IStorage {
       .where(eq(transactions.accountId, accountId))
       .orderBy(desc(transactions.transactionDate));
     
-    if (limit) {
-      return query.limit(limit);
-    }
-    return query;
+    const result = limit ? await query.limit(limit) : await query;
+    return result.map(normalizeTransaction);
   }
 
   async getAllTransactions(limit?: number): Promise<Transaction[]> {
     const query = db.select().from(transactions).orderBy(desc(transactions.transactionDate));
-    if (limit) {
-      return query.limit(limit);
-    }
-    return query;
+    const result = limit ? await query.limit(limit) : await query;
+    return result.map(normalizeTransaction);
   }
 
   async createTransaction(insertTransaction: InsertTransaction): Promise<Transaction> {
     const [transaction] = await db.insert(transactions).values(insertTransaction).returning();
-    return transaction;
+    return normalizeTransaction(transaction);
   }
 
   async getDebitCardsByAccountId(accountId: string): Promise<DebitCard[]> {
@@ -167,11 +197,13 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getAllUsers(): Promise<User[]> {
-    return db.select().from(users);
+    const allUsers = await db.select().from(users);
+    return allUsers.map(normalizeUser);
   }
 
   async getAllAccounts(): Promise<Account[]> {
-    return db.select().from(accounts);
+    const allAccounts = await db.select().from(accounts);
+    return allAccounts.map(normalizeAccount);
   }
 
   async getTotalBalance(): Promise<string> {
@@ -296,6 +328,98 @@ export class DatabaseStorage implements IStorage {
       return transfer;
     });
   }
+
+  async updateUserLock(userId: string, lock: boolean): Promise<User | undefined> {
+    const lockedAt = lock ? new Date() : null;
+    
+    const [user] = await db.update(users)
+      .set({ isLocked: lock ? 'true' : 'false', lockedAt })
+      .where(eq(users.id, userId))
+      .returning();
+    
+    if (!user) return undefined;
+    
+    return normalizeUser(user);
+  }
+
+  async updateAccountBlock(accountId: string, block: boolean): Promise<Account | undefined> {
+    const blockedAt = block ? new Date() : null;
+    
+    const [account] = await db.update(accounts)
+      .set({ isBlocked: block ? 'true' : 'false', blockedAt })
+      .where(eq(accounts.id, accountId))
+      .returning();
+    
+    if (!account) return undefined;
+    
+    return normalizeAccount(account);
+  }
+
+  async updateTransactionHold(transactionId: string, hold: boolean): Promise<Transaction | undefined> {
+    const updates: any = { 
+      isOnHold: hold ? 'true' : 'false',
+      holdReason: hold ? undefined : null
+    };
+    
+    const [transaction] = await db.update(transactions)
+      .set(updates)
+      .where(eq(transactions.id, transactionId))
+      .returning();
+    
+    if (!transaction) return undefined;
+    
+    return normalizeTransaction(transaction);
+  }
+
+  async adjustAccountBalance(accountId: string, amount: string, type: 'credit' | 'debit', description: string): Promise<Account | undefined> {
+    return await db.transaction(async (tx) => {
+      const [account] = await tx
+        .select()
+        .from(accounts)
+        .where(eq(accounts.id, accountId))
+        .for('update');
+
+      if (!account) {
+        throw new Error("Account not found");
+      }
+
+      const adjustAmount = parseFloat(amount);
+      const currentBalance = parseFloat(account.balance);
+      
+      const newBalance = type === 'credit' 
+        ? currentBalance + adjustAmount 
+        : currentBalance - adjustAmount;
+
+      if (newBalance < 0) {
+        throw new Error("Insufficient funds");
+      }
+
+      const newBalanceStr = newBalance.toFixed(2);
+
+      await tx.update(accounts)
+        .set({ balance: newBalanceStr })
+        .where(eq(accounts.id, accountId));
+
+      await tx.insert(transactions).values({
+        accountId: accountId,
+        type: type,
+        amount: type === 'credit' ? amount : `-${amount}`,
+        description: description,
+        merchant: 'Admin Adjustment',
+        category: 'Admin',
+        balanceAfter: newBalanceStr,
+        transactionDate: new Date(),
+      });
+
+      const [updatedAccount] = await tx
+        .select()
+        .from(accounts)
+        .where(eq(accounts.id, accountId));
+
+      return updatedAccount ? normalizeAccount(updatedAccount) : undefined;
+    });
+  }
 }
+
 
 export const storage = new DatabaseStorage();

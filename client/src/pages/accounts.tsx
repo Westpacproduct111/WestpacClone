@@ -1,15 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { LogOut, ArrowUp, ArrowDown } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { LogOut, ArrowUp, ArrowDown, Clock } from "lucide-react";
 import { useLocation } from "wouter";
 import { formatAUD } from "@/lib/currency";
 import { apiRequest } from "@/lib/queryClient";
 import logoImage from "@assets/generated_images/Westpac_red_W_logo_4eaff681.png";
 import { format } from "date-fns";
+import { useState } from "react";
+import { TransactionDetailsModal } from "@/components/transaction-details-modal";
 
 export default function Accounts() {
   const [, setLocation] = useLocation();
+  const [selectedTransaction, setSelectedTransaction] = useState<any | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const { data: accountsData, isLoading: accountsLoading } = useQuery<{accounts: any[]}>({
     queryKey: ["/api/accounts"],
@@ -113,21 +118,33 @@ export default function Accounts() {
                     {checkingTransactions?.transactions?.map((transaction: any, index: number) => (
                       <div
                         key={transaction.id}
-                        className="flex items-center justify-between p-3 rounded-md hover:bg-muted/50"
+                        className="flex items-center justify-between p-3 rounded-md hover:bg-muted/50 cursor-pointer transition-colors"
                         data-testid={`transaction-checking-${index}`}
+                        onClick={() => {
+                          setSelectedTransaction(transaction);
+                          setModalOpen(true);
+                        }}
                       >
-                        <div className="flex items-center gap-3">
-                          <div className={`p-2 rounded-full ${transaction.type === 'credit' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                          <div className={`p-2 rounded-full ${transaction.type === 'credit' ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400'}`}>
                             {transaction.type === 'credit' ? <ArrowDown className="h-4 w-4" /> : <ArrowUp className="h-4 w-4" />}
                           </div>
-                          <div>
-                            <div className="font-medium">{transaction.description}</div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium flex items-center gap-2">
+                              <span className="truncate">{transaction.description}</span>
+                              {transaction.isOnHold && (
+                                <Badge variant="outline" className="text-xs gap-1 bg-yellow-50 text-yellow-700 border-yellow-300 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800">
+                                  <Clock className="h-3 w-3" />
+                                  Hold
+                                </Badge>
+                              )}
+                            </div>
                             <div className="text-sm text-muted-foreground">
                               {format(new Date(transaction.transactionDate), "PPp")}
                             </div>
                           </div>
                         </div>
-                        <div className={`font-semibold ${transaction.type === 'credit' ? 'text-green-600' : 'text-red-600'}`}>
+                        <div className={`font-semibold ${transaction.type === 'credit' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                           {transaction.type === 'credit' ? '+' : ''}{formatAUD(transaction.amount)}
                         </div>
                       </div>
@@ -165,21 +182,33 @@ export default function Accounts() {
                     {savingsTransactions?.transactions?.map((transaction: any, index: number) => (
                       <div
                         key={transaction.id}
-                        className="flex items-center justify-between p-3 rounded-md hover:bg-muted/50"
+                        className="flex items-center justify-between p-3 rounded-md hover:bg-muted/50 cursor-pointer transition-colors"
                         data-testid={`transaction-savings-${index}`}
+                        onClick={() => {
+                          setSelectedTransaction(transaction);
+                          setModalOpen(true);
+                        }}
                       >
-                        <div className="flex items-center gap-3">
-                          <div className={`p-2 rounded-full ${transaction.type === 'credit' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`}>
+                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                          <div className={`p-2 rounded-full ${transaction.type === 'credit' ? 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400' : 'bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400'}`}>
                             {transaction.type === 'credit' ? <ArrowDown className="h-4 w-4" /> : <ArrowUp className="h-4 w-4" />}
                           </div>
-                          <div>
-                            <div className="font-medium">{transaction.description}</div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium flex items-center gap-2">
+                              <span className="truncate">{transaction.description}</span>
+                              {transaction.isOnHold && (
+                                <Badge variant="outline" className="text-xs gap-1 bg-yellow-50 text-yellow-700 border-yellow-300 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800">
+                                  <Clock className="h-3 w-3" />
+                                  Hold
+                                </Badge>
+                              )}
+                            </div>
                             <div className="text-sm text-muted-foreground">
                               {format(new Date(transaction.transactionDate), "PPp")}
                             </div>
                           </div>
                         </div>
-                        <div className={`font-semibold ${transaction.type === 'credit' ? 'text-green-600' : 'text-red-600'}`}>
+                        <div className={`font-semibold ${transaction.type === 'credit' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
                           {transaction.type === 'credit' ? '+' : ''}{formatAUD(transaction.amount)}
                         </div>
                       </div>
@@ -191,6 +220,12 @@ export default function Accounts() {
           </div>
         )}
       </main>
+
+      <TransactionDetailsModal
+        transaction={selectedTransaction}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+      />
     </div>
   );
 }
