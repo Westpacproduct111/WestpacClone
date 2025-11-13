@@ -17,7 +17,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { customerId, password } = req.body;
       
-      console.log("Login attempt:", { customerId, passwordLength: password?.length });
+      console.log("=== LOGIN ATTEMPT ===");
+      console.log("Customer ID:", customerId);
+      console.log("Password length:", password?.length);
+      console.log("Request secure:", req.secure);
+      console.log("X-Forwarded-Proto:", req.headers['x-forwarded-proto']);
+      console.log("Session ID before login:", req.session.id);
       
       if (!customerId || !password) {
         console.log("Missing credentials");
@@ -31,13 +36,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(401).json({ error: "Invalid credentials" });
       }
 
-      console.log("User authenticated:", user.id);
+      console.log("✓ User authenticated:", user.id);
       
       // Regenerate session to ensure fresh session after login
       await new Promise<void>((resolve, reject) => {
         req.session.regenerate((err) => {
-          if (err) reject(err);
-          else resolve();
+          if (err) {
+            console.error("Session regenerate error:", err);
+            reject(err);
+          } else {
+            console.log("✓ Session regenerated");
+            resolve();
+          }
         });
       });
       
@@ -45,12 +55,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       await new Promise<void>((resolve, reject) => {
         req.session.save((err) => {
-          if (err) reject(err);
-          else resolve();
+          if (err) {
+            console.error("Session save error:", err);
+            reject(err);
+          } else {
+            console.log("✓ Session saved");
+            resolve();
+          }
         });
       });
       
-      console.log("Session saved:", req.session.userId);
+      console.log("New Session ID:", req.session.id);
+      console.log("Session userId:", req.session.userId);
+      console.log("===================");
       
       const { password: _, ...userWithoutPassword } = user;
       return res.json({ user: userWithoutPassword });

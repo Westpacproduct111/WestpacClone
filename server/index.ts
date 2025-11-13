@@ -24,8 +24,16 @@ app.use(express.urlencoded({ extended: false }));
 
 const PgStore = connectPgSimple(session);
 
-// Environment-aware cookie settings
-const isProduction = process.env.NODE_ENV === 'production';
+// Replit always uses HTTPS, so we need secure cookies
+// Check if running on Replit (has REPLIT_DEV_DOMAIN) or in production
+const isReplitOrProduction = !!process.env.REPLIT_DEV_DOMAIN || process.env.NODE_ENV === 'production';
+
+console.log('Session config:', {
+  isReplitOrProduction,
+  REPLIT_DEV_DOMAIN: process.env.REPLIT_DEV_DOMAIN,
+  NODE_ENV: process.env.NODE_ENV
+});
+
 const sessionConfig = {
   store: new PgStore({
     pool,
@@ -37,10 +45,10 @@ const sessionConfig = {
   saveUninitialized: false,
   proxy: true,
   cookie: {
-    secure: isProduction,
+    secure: isReplitOrProduction,
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    sameSite: isProduction ? 'none' as const : 'lax' as const,
+    sameSite: isReplitOrProduction ? 'none' as const : 'lax' as const,
     path: '/'
   }
 };
