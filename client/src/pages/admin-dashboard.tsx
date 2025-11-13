@@ -57,8 +57,8 @@ export default function AdminDashboard() {
   const cards = cardsData?.cards || [];
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="bg-[#2C2C2C] text-white sticky top-0 z-50" data-testid="header-admin-dashboard">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      <header className="bg-[#2C2C2C] text-white sticky top-0 z-50 shadow-lg" data-testid="header-admin-dashboard">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-8">
@@ -144,9 +144,12 @@ export default function AdminDashboard() {
         </div>
 
         <div className="grid gap-8 lg:grid-cols-2">
-          <Card data-testid="card-users-list">
+          <Card data-testid="card-users-list" className="bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 border-2">
             <CardHeader>
-              <CardTitle>Users</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-[#DA1710]" />
+                Users
+              </CardTitle>
               <CardDescription>All registered users</CardDescription>
             </CardHeader>
             <CardContent>
@@ -154,18 +157,27 @@ export default function AdminDashboard() {
                 {users.slice(0, 10).map((user) => (
                   <div
                     key={user.id}
-                    className="flex items-center justify-between p-3 border rounded-md"
+                    className="flex items-start justify-between p-4 border-2 rounded-lg hover-elevate bg-white dark:bg-slate-900"
                     data-testid={`user-item-${user.id}`}
                   >
-                    <div>
-                      <p className="font-medium">{user.fullName}</p>
-                      <p className="text-xs text-muted-foreground">{user.email}</p>
+                    <div className="flex-1">
+                      <p className="font-bold text-lg mb-1">{user.fullName}</p>
+                      <p className="text-sm text-muted-foreground mb-1">
+                        <span className="font-medium">Email:</span> {user.email}
+                      </p>
+                      <p className="text-sm text-muted-foreground mb-1">
+                        <span className="font-medium">Customer ID:</span> <span className="font-mono text-[#DA1710]">{user.customerId}</span>
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {user.suburb}, {user.state} {user.postcode}
+                      </p>
                     </div>
                     <Button
-                      variant="outline"
+                      variant="default"
                       size="sm"
                       onClick={() => setLocation(`/admin/users/${user.id}`)}
                       data-testid={`button-view-user-${user.id}`}
+                      className="bg-[#DA1710] hover:bg-[#B01410]"
                     >
                       View Details
                     </Button>

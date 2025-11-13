@@ -8,6 +8,7 @@ import Login from "@/pages/login";
 import AdminLogin from "@/pages/admin-login";
 import Dashboard from "@/pages/dashboard";
 import AdminDashboard from "@/pages/admin-dashboard";
+import AdminUserDetails from "@/pages/admin-user-details";
 import Accounts from "@/pages/accounts";
 import Cards from "@/pages/cards";
 import Profile from "@/pages/profile";
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
+      <Route path="/admin/users/:id" component={AdminUserDetails} />
       <Route path="/accounts" component={Accounts} />
       <Route path="/cards" component={Cards} />
       <Route path="/profile" component={Profile} />
