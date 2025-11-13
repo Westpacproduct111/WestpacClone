@@ -240,7 +240,7 @@ export default function Home() {
                   </h3>
                   <ul className="space-y-2">
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-compare-loans">
+                      <a href="https://www.westpac.com.au/personal-banking/home-loans/all-interest-rates/?fid=HP:product:hl:subhead:wbc:www:pers:home-loans:all-interest-rates" className="text-sm text-foreground hover:underline" data-testid="link-compare-loans">
                         Compare loans and rates
                       </a>
                     </li>
