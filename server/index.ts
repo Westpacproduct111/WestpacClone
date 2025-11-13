@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import session from "express-session";
-import MemoryStore from "memorystore";
+import connectPgSimple from "connect-pg-simple";
+import { pool } from "../db";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -18,11 +19,13 @@ app.use(express.json({
 }));
 app.use(express.urlencoded({ extended: false }));
 
-const MemStore = MemoryStore(session);
+const PgStore = connectPgSimple(session);
 
 app.use(session({
-  store: new MemStore({
-    checkPeriod: 86400000
+  store: new PgStore({
+    pool,
+    tableName: 'session',
+    createTableIfMissing: true
   }),
   secret: process.env.SESSION_SECRET || 'westpac-banking-secret-key-change-in-production',
   resave: false,
@@ -30,7 +33,8 @@ app.use(session({
   cookie: {
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24 * 7
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+    sameSite: 'lax'
   }
 }));
 
