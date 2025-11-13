@@ -411,6 +411,128 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Best Banking App Section */}
+      <section className="bg-muted/30 py-16 lg:py-20" data-testid="section-banking-app">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Phone Mockup - Left Side */}
+            <div className="flex justify-center lg:justify-start order-2 lg:order-1">
+              <div className="relative">
+                <div className="w-[280px] bg-[#4A3F6B] rounded-[40px] p-4 shadow-2xl">
+                  <div className="bg-white rounded-[32px] p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="text-xs font-medium">9:41</span>
+                      <div className="flex gap-1">
+                        <div className="w-4 h-3 bg-foreground/80 rounded-sm"></div>
+                        <div className="w-4 h-3 bg-foreground/80 rounded-sm"></div>
+                        <div className="w-4 h-3 bg-foreground/80 rounded-sm"></div>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-semibold">Cash flow</span>
+                        <span className="text-xs text-[#DA1710]">Filter</span>
+                      </div>
+                      <div className="h-32 flex items-end gap-2">
+                        <div className="flex-1 flex flex-col gap-1">
+                          <div className="h-16 bg-[#2C2C2C] rounded-sm"></div>
+                          <div className="h-10 bg-[#DA1710] rounded-sm"></div>
+                        </div>
+                        <div className="flex-1 flex flex-col gap-1">
+                          <div className="h-20 bg-[#2C2C2C] rounded-sm"></div>
+                          <div className="h-8 bg-[#DA1710] rounded-sm"></div>
+                        </div>
+                        <div className="flex-1 flex flex-col gap-1">
+                          <div className="h-24 bg-[#2C2C2C] rounded-sm"></div>
+                          <div className="h-12 bg-[#DA1710] rounded-sm"></div>
+                        </div>
+                        <div className="flex-1 flex flex-col gap-1">
+                          <div className="h-20 bg-[#2C2C2C] rounded-sm"></div>
+                          <div className="h-10 bg-[#DA1710] rounded-sm"></div>
+                        </div>
+                      </div>
+                      <div className="text-center pt-4 border-t">
+                        <p className="text-xs text-muted-foreground mb-1">September 2024</p>
+                        <p className="text-lg font-bold">$3,028.15</p>
+                        <p className="text-xs text-muted-foreground">From eligible accounts</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Text Content - Right Side */}
+            <div className="order-1 lg:order-2">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-foreground" data-testid="text-banking-app-title">
+                <span className="text-[#DA1710]">Best Banking App</span>
+                <span className="text-[#DA1710]">*</span>, three years running
+              </h2>
+              <p className="text-base lg:text-lg text-muted-foreground mb-6" data-testid="text-banking-app-description">
+                Rest assured knowing the smart budgeting and savings tools on Australia's best banking app can help you get more from your dollars.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button 
+                  className="bg-[#DA1710] hover:bg-[#C01309] text-white font-semibold" 
+                  data-testid="button-explore-app"
+                >
+                  Explore App budget tools
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="font-semibold border-2" 
+                  data-testid="button-get-app"
+                >
+                  Get the Westpac App
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* From Sketchy to Secure Section */}
+      <section className="bg-white py-16 lg:py-20" data-testid="section-security">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-2" data-testid="text-security-title">
+              From sketchy to secure
+            </h2>
+            <p className="text-2xl lg:text-3xl text-[#DA1710] font-bold" data-testid="text-security-subtitle">
+              with layers and layers of defence
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 max-w-4xl mx-auto">
+            {/* Westpac Verify */}
+            <div className="text-center" data-testid="card-security-verify">
+              <div className="mb-6 flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-[#FFE5E5] flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-full border-4 border-[#DA1710] flex items-center justify-center">
+                    <div className="w-3 h-3 rounded-full bg-[#DA1710]"></div>
+                  </div>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-foreground" data-testid="text-verify-title">
+                <span className="font-bold">Westpac Verify</span> with Confirmation of Payee checks the BSB and account details of new payees and alerts you to potential scams or incorrect information.
+              </h3>
+            </div>
+
+            {/* Digital Card */}
+            <div className="text-center" data-testid="card-security-digital">
+              <div className="mb-6 flex justify-center">
+                <div className="w-16 h-16 rounded-full bg-[#FFE5E5] flex items-center justify-center">
+                  <CreditCard className="w-8 h-8 text-[#DA1710]" />
+                </div>
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-foreground" data-testid="text-digital-title">
+                Access a <span className="font-bold">digital version of your card</span> through the Westpac App. The dynamic CVC changes every 24 hours - making your card details even more secure.
+              </h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Main Content Area */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid lg:grid-cols-4 gap-8">
