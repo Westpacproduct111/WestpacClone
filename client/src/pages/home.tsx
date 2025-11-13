@@ -333,7 +333,7 @@ export default function Home() {
                   </h3>
                   <ul className="space-y-2">
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-debt-consolidation">
+                      <a href="https://www.westpac.com.au/personal-banking/personal-loans/debt-consolidation/?fid=HP:product:pls:subhead:wbc:www:calc-tool:pers:personal-loans:debt-consolidation" className="text-sm text-foreground hover:underline" data-testid="link-debt-consolidation">
                         Debt Consolidation
                       </a>
                     </li>
