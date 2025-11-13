@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { ChevronRight, MapPin, Globe, MessageSquare, HeartHandshake, Menu, Search, ChevronDown, Home as HomeIcon, CreditCard, PiggyBank } from "lucide-react";
 import { useState } from "react";
 import logoImage from "@assets/generated_images/Westpac_red_W_logo_4eaff681.png";
-import heroImage from "@assets/generated_images/Banking_security_key_lock_b3e49ef1.png";
+import heroImage from "@assets/ruby-necklace.jpg";
 import investPropertyImage from "@assets/generated_images/Investment_property_house_exterior_917d55c2.png";
 import rentalYieldImage from "@assets/generated_images/Financial_calculation_rental_yield_e2a56491.png";
 import businessFinanceImage from "@assets/generated_images/Business_finance_meeting_guide_61c0e275.png";
@@ -177,7 +177,7 @@ export default function Home() {
         <div className="absolute inset-0">
           <img 
             src={heroImage} 
-            alt="Door with brass key in lock" 
+            alt="Ruby necklace on textured background" 
             className="w-full h-full object-cover mix-blend-overlay opacity-70" 
             data-testid="img-hero-background"
           />
@@ -185,10 +185,10 @@ export default function Home() {
         <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <div className="max-w-2xl text-white">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 tracking-tight leading-tight uppercase" data-testid="text-hero-headline">
-              LOCK IN A DISCOUNTED RATE FOR THE LIFE OF YOUR HOME LOAN PACKAGE
+              50 BUCKS FEELING LUXE
             </h1>
             <p className="text-base sm:text-lg mb-6 text-white/95 leading-relaxed" data-testid="text-hero-description">
-              Available for packaged home loans with $395 annual fee. Conditions, credit criteria, eligibility, fees and charges apply.
+              Get $50 cashback when you open a Westpac Choice account and spend $50 using your mobile wallet. T&Cs, eligibility, fees and charges apply.
             </p>
             <Button 
               size="lg"
