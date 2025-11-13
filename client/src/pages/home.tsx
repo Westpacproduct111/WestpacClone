@@ -5,8 +5,10 @@ import { ChevronRight, MapPin, Globe, MessageSquare, HeartHandshake, Menu, Searc
 import { useState } from "react";
 import logoImage from "@assets/generated_images/Westpac_red_W_logo_4eaff681.png";
 import heroImage from "@assets/ruby-necklace.jpg";
-import investPropertyImage from "@assets/generated_images/Investment_property_house_exterior_917d55c2.png";
-import rentalYieldImage from "@assets/generated_images/Financial_calculation_rental_yield_e2a56491.png";
+import investPropertyImage from "@assets/investment-property-strategies.jpg";
+import rentalYieldImage from "@assets/calculating-rental-yield.jpg";
+import homeEquityImage from "@assets/home-equity-investment.jpg";
+import propertyCostsImage from "@assets/investment-property-costs.jpg";
 import businessFinanceImage from "@assets/generated_images/Business_finance_meeting_guide_61c0e275.png";
 import businessBankingImage from "@assets/generated_images/Business_banking_startup_workspace_159b163f.png";
 import weaveImage from "@assets/generated_images/Indigenous_weave_pattern_banner_599100b2.png";
@@ -596,7 +598,7 @@ export default function Home() {
                         Investment property strategies
                       </h3>
                       <p className="text-muted-foreground text-sm" data-testid="text-article-1-description">
-                        Tips to invest smarter.
+                        Tips that could help you make the most of potential profits.
                       </p>
                     </div>
                   </a>
@@ -623,26 +625,42 @@ export default function Home() {
                 </Card>
 
                 {/* Article 3 */}
-                <Card className="p-5 hover-elevate" data-testid="card-article-3">
+                <Card className="overflow-hidden hover-elevate" data-testid="card-article-3">
                   <a href="#" className="block" data-testid="link-article-3">
-                    <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-3-title">
-                      Home equity for investment
-                    </h3>
-                    <p className="text-muted-foreground text-sm" data-testid="text-article-3-description">
-                      Explore how to use your home's equity to buy an investment property.
-                    </p>
+                    <img 
+                      src={homeEquityImage} 
+                      alt="Home equity for investment" 
+                      className="w-full h-48 object-cover" 
+                      data-testid="img-article-3"
+                    />
+                    <div className="p-5">
+                      <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-3-title">
+                        Home equity for investment
+                      </h3>
+                      <p className="text-muted-foreground text-sm" data-testid="text-article-3-description">
+                        Explore how to use your home's equity to buy an investment property.
+                      </p>
+                    </div>
                   </a>
                 </Card>
 
                 {/* Article 4 */}
-                <Card className="p-5 hover-elevate" data-testid="card-article-4">
+                <Card className="overflow-hidden hover-elevate" data-testid="card-article-4">
                   <a href="#" className="block" data-testid="link-article-4">
-                    <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-4-title">
-                      Investment property costs
-                    </h3>
-                    <p className="text-muted-foreground text-sm" data-testid="text-article-4-description">
-                      Get a clear view of the fees and expenses involved in property investment.
-                    </p>
+                    <img 
+                      src={propertyCostsImage} 
+                      alt="Investment property costs" 
+                      className="w-full h-48 object-cover" 
+                      data-testid="img-article-4"
+                    />
+                    <div className="p-5">
+                      <h3 className="text-lg font-bold mb-2 text-foreground" data-testid="text-article-4-title">
+                        Investment property costs
+                      </h3>
+                      <p className="text-muted-foreground text-sm" data-testid="text-article-4-description">
+                        Get a clear view of the fees and expenses involved in property investment.
+                      </p>
+                    </div>
                   </a>
                 </Card>
               </div>
