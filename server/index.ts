@@ -7,6 +7,9 @@ import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
 
+// Trust proxy for Replit environment
+app.set('trust proxy', 1);
+
 declare module 'http' {
   interface IncomingMessage {
     rawBody: unknown
@@ -32,10 +35,10 @@ app.use(session({
   saveUninitialized: true,
   proxy: true,
   cookie: {
-    secure: false,
+    secure: true,
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24 * 7,
-    sameSite: 'lax',
+    sameSite: 'none',
     path: '/'
   }
 }));

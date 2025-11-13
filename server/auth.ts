@@ -14,13 +14,17 @@ export async function verifyPassword(password: string, hashedPassword: string): 
 }
 
 export async function authenticateUser(customerId: string, password: string): Promise<User | null> {
+  console.log("Authenticating user:", customerId);
   const [user] = await db.select().from(users).where(eq(users.customerId, customerId)).limit(1);
   
   if (!user) {
+    console.log("User not found:", customerId);
     return null;
   }
 
+  console.log("User found, checking password...");
   const isValid = await verifyPassword(password, user.password);
+  console.log("Password valid:", isValid);
   return isValid ? user : null;
 }
 
