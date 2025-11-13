@@ -281,7 +281,7 @@ export default function Home() {
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-term-deposit">
+                      <a href="https://www.westpac.com.au/personal-banking/bank-accounts/term-deposit/?fid=HP:product:ba:subhead:wbc:www:pers:bank-accounts:term-deposit" className="text-sm text-foreground hover:underline" data-testid="link-term-deposit">
                         Term deposit
                       </a>
                     </li>
