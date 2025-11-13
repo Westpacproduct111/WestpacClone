@@ -271,7 +271,7 @@ export default function Home() {
                   </h3>
                   <ul className="space-y-2">
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-transaction-accounts">
+                      <a href="https://www.westpac.com.au/personal-banking/bank-accounts/transaction/choice/?fid=HP:product:ba:subhead:wbc:www:pers:bank-accounts:transaction:choice" className="text-sm text-foreground hover:underline" data-testid="link-transaction-accounts">
                         Transaction accounts
                       </a>
                     </li>
