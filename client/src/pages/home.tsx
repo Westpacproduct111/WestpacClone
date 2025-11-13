@@ -312,7 +312,7 @@ export default function Home() {
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-low-fee-card">
+                      <a href="https://www.westpac.com.au/personal-banking/credit-cards/low-fee/?fid=HP:product:cc:subhead:wbc:www:pers:credit-cards:low-fee" className="text-sm text-foreground hover:underline" data-testid="link-low-fee-card">
                         Low fee credit card
                       </a>
                     </li>
