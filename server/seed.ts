@@ -27,12 +27,12 @@ async function seed() {
     console.log("Creating checking account...");
     const [checkingAccount] = await db.insert(accounts).values({
       userId: user.id,
-      accountNumber: "123456789",
+      accountNumber: "368274",
       accountName: "Westpac Choice",
       accountType: "Checking",
       balance: "720000.00",
       currency: "AUD",
-      bsb: "032-123",
+      bsb: "034-089",
     }).returning();
 
     console.log("✅ Checking account created:", checkingAccount.accountNumber, "- Balance: $720,000");
@@ -40,12 +40,12 @@ async function seed() {
     console.log("Creating savings account...");
     const [savingsAccount] = await db.insert(accounts).values({
       userId: user.id,
-      accountNumber: "987654321",
+      accountNumber: "529483",
       accountName: "Westpac eSaver",
       accountType: "Savings",
       balance: "150000.00",
       currency: "AUD",
-      bsb: "032-123",
+      bsb: "034-089",
     }).returning();
 
     console.log("✅ Savings account created:", savingsAccount.accountNumber, "- Balance: $150,000");
@@ -53,12 +53,12 @@ async function seed() {
     console.log("Creating business account...");
     const [businessAccount] = await db.insert(accounts).values({
       userId: user.id,
-      accountNumber: "456789123",
+      accountNumber: "781046",
       accountName: "Westpac Business One",
       accountType: "Business",
       balance: "0.00",
       currency: "AUD",
-      bsb: "032-123",
+      bsb: "034-156",
     }).returning();
 
     console.log("✅ Business account created:", businessAccount.accountNumber, "- Balance: $0");
@@ -218,7 +218,7 @@ async function seed() {
     await db.insert(debitCards).values([
       {
         accountId: checkingAccount.id,
-        cardNumber: "4532 1234 5678 9010",
+        cardNumber: "4539 8472 6193 5028",
         cardholderName: "KELLY ANN JAMES",
         expiryMonth: "08",
         expiryYear: expiryYear,
@@ -228,7 +228,7 @@ async function seed() {
       },
       {
         accountId: savingsAccount.id,
-        cardNumber: "5425 2334 3010 9903",
+        cardNumber: "5462 7183 9024 6157",
         cardholderName: "KELLY ANN JAMES",
         expiryMonth: "12",
         expiryYear: expiryYear,
@@ -258,9 +258,9 @@ async function seed() {
     console.log("   Customer ID: 12345678");
     console.log("   Email: cjatsspeedwaay@gmail.com");
     console.log("   Password: RyanJames15102003");
-    console.log("   Checking Account: $720,000.00 AUD");
-    console.log("   Savings Account: $150,000.00 AUD");
-    console.log("   Business Account: $0.00 AUD");
+    console.log("   Checking Account (BSB: 034-089): 368274 - $720,000.00 AUD");
+    console.log("   Savings Account (BSB: 034-089): 529483 - $150,000.00 AUD");
+    console.log("   Business Account (BSB: 034-156): 781046 - $0.00 AUD");
     console.log(`   Total Transactions: ${allTransactions.length}`);
     console.log("   Debit Cards: 2");
     console.log("   Admin: unitedhome2016@yahoo.com");
