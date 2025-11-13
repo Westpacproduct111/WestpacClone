@@ -245,7 +245,7 @@ export default function Home() {
                       </a>
                     </li>
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-repayment-calc">
+                      <a href="https://www.westpac.com.au/personal-banking/home-loans/calculator/mortgage-repayment/?fid=HP:product:hl:subhead:wbc:www:pers:home-loans:calculator:mortgage-repayment" className="text-sm text-foreground hover:underline" data-testid="link-repayment-calc">
                         Repayment calculator
                       </a>
                     </li>
