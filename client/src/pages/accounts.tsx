@@ -34,7 +34,7 @@ export default function Accounts() {
   });
 
   const handleLogout = async () => {
-    await apiRequest("/api/auth/logout", "POST", {});
+    await apiRequest("POST", "/api/auth/logout", {});
     setLocation("/login");
   };
 

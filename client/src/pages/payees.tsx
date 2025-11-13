@@ -41,7 +41,7 @@ export default function Payees() {
   });
 
   const addPayeeMutation = useMutation({
-    mutationFn: (data: PayeeForm) => apiRequest("/api/payees", "POST", data),
+    mutationFn: (data: PayeeForm) => apiRequest("POST", "/api/payees", data),
     onSuccess: () => {
       toast({
         title: "Payee Added",
@@ -61,7 +61,7 @@ export default function Payees() {
   });
 
   const deletePayeeMutation = useMutation({
-    mutationFn: (payeeId: string) => apiRequest(`/api/payees/${payeeId}`, "DELETE", {}),
+    mutationFn: (payeeId: string) => apiRequest("DELETE", `/api/payees/${payeeId}`, {}),
     onSuccess: () => {
       toast({
         title: "Payee Deleted",

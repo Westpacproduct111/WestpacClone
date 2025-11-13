@@ -34,7 +34,7 @@ export default function AdminDashboard() {
   });
 
   const handleLogout = async () => {
-    await apiRequest("/api/auth/logout", "POST", {});
+    await apiRequest("POST", "/api/auth/logout", {});
     setLocation("/admin/login");
   };
 

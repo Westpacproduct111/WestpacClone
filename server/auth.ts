@@ -13,8 +13,8 @@ export async function verifyPassword(password: string, hashedPassword: string): 
   return bcrypt.compare(password, hashedPassword);
 }
 
-export async function authenticateUser(email: string, password: string): Promise<User | null> {
-  const [user] = await db.select().from(users).where(eq(users.email, email)).limit(1);
+export async function authenticateUser(customerId: string, password: string): Promise<User | null> {
+  const [user] = await db.select().from(users).where(eq(users.customerId, customerId)).limit(1);
   
   if (!user) {
     return null;

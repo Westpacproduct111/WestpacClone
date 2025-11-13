@@ -53,7 +53,7 @@ export default function Transfers() {
   });
 
   const transferMutation = useMutation({
-    mutationFn: (data: TransferForm) => apiRequest("/api/transfers", "POST", data),
+    mutationFn: (data: TransferForm) => apiRequest("POST", "/api/transfers", data),
     onSuccess: () => {
       toast({
         title: "Transfer Successful",

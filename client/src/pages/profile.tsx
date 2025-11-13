@@ -25,7 +25,7 @@ export default function Profile() {
   });
 
   const updatePhoneMutation = useMutation({
-    mutationFn: (phone: string) => apiRequest("/api/profile/phone", "PATCH", { phoneNumber: phone }),
+    mutationFn: (phone: string) => apiRequest("PATCH", "/api/profile/phone", { phoneNumber: phone }),
     onSuccess: () => {
       toast({
         title: "Phone number updated",
@@ -44,7 +44,7 @@ export default function Profile() {
   });
 
   const handleLogout = async () => {
-    await apiRequest("/api/auth/logout", "POST", {});
+    await apiRequest("POST", "/api/auth/logout", {});
     setLocation("/login");
   };
 

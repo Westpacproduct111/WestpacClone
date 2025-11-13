@@ -19,7 +19,7 @@ export default function Dashboard() {
   });
 
   const handleLogout = async () => {
-    await apiRequest("/api/auth/logout", "POST", {});
+    await apiRequest("POST", "/api/auth/logout", {});
     setLocation("/login");
   };
 
