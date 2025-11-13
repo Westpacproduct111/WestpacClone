@@ -680,24 +680,34 @@ export default function Home() {
             </Card>
 
             {/* Contact Through App */}
-            <Card className="p-8 bg-[#E8D5F0]" data-testid="card-contact-app">
-              <h3 className="text-xl lg:text-2xl font-black mb-4 uppercase text-[#2C2C2C]" data-testid="text-heading-contact-app">
-                Contact us through the Westpac app
-              </h3>
-              <p className="text-sm text-foreground mb-6" data-testid="text-app-description">
-                Sign into the app, skip the automated questions and get through to the right person, fast.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 mb-6">
-                <a href="#" className="inline-block" data-testid="link-google-play">
-                  <div className="bg-black text-white px-4 py-2 rounded-md flex items-center gap-2">
-                    <span className="text-xs font-semibold">GET IT ON Google Play</span>
-                  </div>
-                </a>
-                <a href="#" className="inline-block" data-testid="link-app-store">
-                  <div className="bg-black text-white px-4 py-2 rounded-md flex items-center gap-2">
-                    <span className="text-xs font-semibold">Download on the App Store</span>
-                  </div>
-                </a>
+            <Card className="p-8 bg-[#E8D5F0] relative overflow-hidden" data-testid="card-contact-app">
+              <div className="relative z-10">
+                <h3 className="text-xl lg:text-2xl font-black mb-4 uppercase text-[#2C2C2C]" data-testid="text-heading-contact-app">
+                  Contact us through the Westpac app
+                </h3>
+                <p className="text-sm text-foreground mb-6" data-testid="text-app-description">
+                  Sign into the app, skip the automated questions and get through to the right person, fast.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                  <a href="#" className="inline-block" data-testid="link-google-play">
+                    <div className="bg-black text-white px-4 py-2 rounded-md flex items-center gap-2">
+                      <span className="text-xs font-semibold">GET IT ON Google Play</span>
+                    </div>
+                  </a>
+                  <a href="#" className="inline-block" data-testid="link-app-store">
+                    <div className="bg-black text-white px-4 py-2 rounded-md flex items-center gap-2">
+                      <span className="text-xs font-semibold">Download on the App Store</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div className="absolute bottom-0 right-0 w-48 h-48 lg:w-56 lg:h-56">
+                <img 
+                  src="https://www.westpac.com.au/content/dam/public/wbc/images/home/exp/wbc_hp_mobile_banking_app_max_706x630.webp" 
+                  alt="Westpac mobile banking app" 
+                  className="w-full h-full object-contain"
+                  data-testid="img-mobile-app"
+                />
               </div>
             </Card>
           </div>
