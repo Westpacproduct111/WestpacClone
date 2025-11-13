@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ChevronRight, MapPin, Globe, MessageSquare, HeartHandshake, Menu, Search, ChevronDown, Home as HomeIcon, CreditCard, PiggyBank, Car, Building2, MoreHorizontal, Phone, Umbrella } from "lucide-react";
+import { SiFacebook, SiX, SiYoutube, SiLinkedin, SiInstagram } from "react-icons/si";
 import { useState } from "react";
 import logoImage from "@assets/generated_images/Westpac_red_W_logo_4eaff681.png";
 import heroImage from "@assets/ruby-necklace.jpg";
@@ -876,20 +877,65 @@ export default function Home() {
           {/* Social Icons and Logo */}
           <div className="flex items-center justify-between border-t border-border pt-6">
             <div className="flex gap-3">
-              <a href="#" className="text-[#3b5998] hover:opacity-80" data-testid="link-facebook">
-                <div className="w-8 h-8 bg-[#3b5998] rounded flex items-center justify-center text-white font-bold text-xs">f</div>
+              <a 
+                href="https://www.facebook.com/Westpac" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity" 
+                data-testid="link-facebook"
+                aria-label="Facebook"
+              >
+                <div className="w-8 h-8 bg-[#3b5998] rounded flex items-center justify-center">
+                  <SiFacebook className="w-4 h-4 text-white" />
+                </div>
               </a>
-              <a href="#" className="text-[#000000] hover:opacity-80" data-testid="link-x">
-                <div className="w-8 h-8 bg-[#000000] rounded flex items-center justify-center text-white font-bold text-xs">X</div>
+              <a 
+                href="https://twitter.com/westpac" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity" 
+                data-testid="link-x"
+                aria-label="Twitter"
+              >
+                <div className="w-8 h-8 bg-[#000000] rounded flex items-center justify-center">
+                  <SiX className="w-4 h-4 text-white" />
+                </div>
               </a>
-              <a href="#" className="text-[#ff0000] hover:opacity-80" data-testid="link-youtube">
-                <div className="w-8 h-8 bg-[#ff0000] rounded flex items-center justify-center text-white font-bold text-xs">▶</div>
+              <a 
+                href="https://www.youtube.com/westpac" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity" 
+                data-testid="link-youtube"
+                aria-label="YouTube"
+              >
+                <div className="w-8 h-8 bg-[#ff0000] rounded flex items-center justify-center">
+                  <SiYoutube className="w-4 h-4 text-white" />
+                </div>
               </a>
-              <a href="#" className="text-[#0077b5] hover:opacity-80" data-testid="link-linkedin">
-                <div className="w-8 h-8 bg-[#0077b5] rounded flex items-center justify-center text-white font-bold text-xs">in</div>
+              <a 
+                href="https://www.linkedin.com/company/westpac" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity" 
+                data-testid="link-linkedin"
+                aria-label="LinkedIn"
+              >
+                <div className="w-8 h-8 bg-[#0077b5] rounded flex items-center justify-center">
+                  <SiLinkedin className="w-4 h-4 text-white" />
+                </div>
               </a>
-              <a href="#" className="text-[#e4405f] hover:opacity-80" data-testid="link-instagram">
-                <div className="w-8 h-8 bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045] rounded flex items-center justify-center text-white font-bold text-xs">📷</div>
+              <a 
+                href="https://www.instagram.com/westpac/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:opacity-80 transition-opacity" 
+                data-testid="link-instagram"
+                aria-label="Instagram"
+              >
+                <div className="w-8 h-8 bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045] rounded flex items-center justify-center">
+                  <SiInstagram className="w-4 h-4 text-white" />
+                </div>
               </a>
             </div>
             <div>
