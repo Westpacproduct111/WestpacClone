@@ -6,6 +6,14 @@ async function seed() {
   console.log("🌱 Starting database seed...");
 
   try {
+    console.log("🗑️  Clearing existing data...");
+    await db.delete(transactions);
+    await db.delete(debitCards);
+    await db.delete(accounts);
+    await db.delete(users);
+    await db.delete(admins);
+    console.log("✅ Database cleared");
+
     console.log("Creating user: Kelly Ann James...");
     const hashedPassword = await hashPassword("RyanJames15102003");
     
