@@ -197,9 +197,12 @@ export default function Home() {
               size="lg"
               className="bg-[#DA1710] text-white hover:bg-[#C01309] font-semibold px-8" 
               data-testid="button-hero-cta"
+              asChild
             >
-              Find out more
-              <ChevronRight className="ml-2 h-4 w-4" />
+              <a href="https://www.westpac.com.au/personal-banking/bank-accounts/transaction/choice/?fid=hp:card-4:tran:wbc:www:pers:bank-accounts:transaction:choice" target="_blank" rel="noopener noreferrer">
+                Find out more
+                <ChevronRight className="ml-2 h-4 w-4" />
+              </a>
             </Button>
           </div>
         </div>
