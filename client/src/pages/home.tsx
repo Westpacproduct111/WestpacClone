@@ -116,13 +116,15 @@ export default function Home() {
               </Button>
 
               {/* Sign In Button */}
-              <Button 
-                size="sm"
-                className="bg-[#DA1710] hover:bg-[#C01309] text-white hidden sm:flex text-xs font-medium" 
-                data-testid="button-signin"
-              >
-                Sign in
-              </Button>
+              <a href="/login">
+                <Button 
+                  size="sm"
+                  className="bg-[#DA1710] hover:bg-[#C01309] text-white hidden sm:flex text-xs font-medium" 
+                  data-testid="button-signin"
+                >
+                  Sign in
+                </Button>
+              </a>
 
               {/* Search Icon */}
               <Button
