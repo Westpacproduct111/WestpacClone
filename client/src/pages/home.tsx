@@ -302,7 +302,7 @@ export default function Home() {
                   </h3>
                   <ul className="space-y-2">
                     <li>
-                      <a href="#" className="text-sm text-foreground hover:underline" data-testid="link-rewards-cards">
+                      <a href="https://www.westpac.com.au/personal-banking/credit-cards/reward/?fid=HP:product:cc:subhead:wbc:www:pers:credit-cards:reward" className="text-sm text-foreground hover:underline" data-testid="link-rewards-cards">
                         Rewards credit cards
                       </a>
                     </li>
