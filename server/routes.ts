@@ -4,8 +4,8 @@ import { storage } from "./storage";
 import { authenticateUser, authenticateAdmin } from "./auth";
 import { updateUserPhoneSchema, transferFundsSchema, insertPayeeSchema } from "@shared/schema";
 
-declare module "express-session" {
-  interface SessionData {
+declare module "cookie-session" {
+  interface CookieSessionObject {
     userId?: string;
     adminId?: string;
   }
@@ -22,7 +22,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log("Password length:", password?.length);
       console.log("Request secure:", req.secure);
       console.log("X-Forwarded-Proto:", req.headers['x-forwarded-proto']);
-      console.log("Session ID before login:", req.session.id);
       
       if (!customerId || !password) {
         console.log("Missing credentials");
@@ -38,34 +37,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       console.log("✓ User authenticated:", user.id);
       
-      // Regenerate session to ensure fresh session after login
-      await new Promise<void>((resolve, reject) => {
-        req.session.regenerate((err) => {
-          if (err) {
-            console.error("Session regenerate error:", err);
-            reject(err);
-          } else {
-            console.log("✓ Session regenerated");
-            resolve();
-          }
-        });
-      });
+      // With cookie-session, just set the session data - it's automatically saved
+      req.session = { userId: user.id };
       
-      req.session.userId = user.id;
-      
-      await new Promise<void>((resolve, reject) => {
-        req.session.save((err) => {
-          if (err) {
-            console.error("Session save error:", err);
-            reject(err);
-          } else {
-            console.log("✓ Session saved");
-            resolve();
-          }
-        });
-      });
-      
-      console.log("New Session ID:", req.session.id);
+      console.log("✓ Session created");
       console.log("Session userId:", req.session.userId);
       console.log("===================");
       
@@ -78,12 +53,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   app.post("/api/auth/logout", (req: Request, res: Response) => {
-    req.session.destroy((err) => {
-      if (err) {
-        return res.status(500).json({ error: "Logout failed" });
-      }
-      res.json({ message: "Logged out successfully" });
-    });
+    // With cookie-session, set to null to clear the session
+    req.session = null;
+    res.json({ message: "Logged out successfully" });
   });
 
   app.get("/api/auth/me", async (req: Request, res: Response) => {

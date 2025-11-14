@@ -1,8 +1,6 @@
 import express, { type Request, Response, NextFunction } from "express";
-import session from "express-session";
-import connectPgSimple from "connect-pg-simple";
+import cookieSession from "cookie-session";
 import cors from "cors";
-import { pool } from "../db";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -54,8 +52,6 @@ app.use(express.json({
 }));
 app.use(express.urlencoded({ extended: false }));
 
-const PgStore = connectPgSimple(session);
-
 // Replit always uses HTTPS, so we need secure cookies
 // Check if running on Replit (has REPLIT_DEV_DOMAIN) or in production
 const isReplitOrProduction = !!process.env.REPLIT_DEV_DOMAIN || process.env.NODE_ENV === 'production';
@@ -66,26 +62,16 @@ console.log('Session config:', {
   NODE_ENV: process.env.NODE_ENV
 });
 
-const sessionConfig = {
-  store: new PgStore({
-    pool,
-    tableName: 'session',
-    createTableIfMissing: true
-  }),
-  secret: process.env.SESSION_SECRET || 'westpac-banking-secret-key-change-in-production',
-  resave: false,
-  saveUninitialized: false,
-  proxy: true,
-  cookie: {
-    secure: isReplitOrProduction,
-    httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-    sameSite: isReplitOrProduction ? 'none' as const : 'lax' as const,
-    path: '/'
-  }
-};
-
-app.use(session(sessionConfig));
+// Use cookie-session for simpler, working sameSite='lax' support
+app.use(cookieSession({
+  name: 'connect.sid',
+  keys: [process.env.SESSION_SECRET || 'westpac-banking-secret-key-change-in-production'],
+  maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+  secure: isReplitOrProduction,
+  httpOnly: true,
+  sameSite: 'lax',
+  path: '/'
+}));
 
 app.use((req, res, next) => {
   const start = Date.now();

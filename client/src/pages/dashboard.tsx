@@ -6,17 +6,34 @@ import { useLocation } from "wouter";
 import { formatAUD } from "@/lib/currency";
 import { apiRequest } from "@/lib/queryClient";
 import logoImage from "@assets/generated_images/Westpac_red_W_logo_4eaff681.png";
+import { useEffect } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Dashboard() {
   const [, setLocation] = useLocation();
+  const { toast } = useToast();
 
-  const { data: userData, isLoading: userLoading } = useQuery<{user: any}>({
+  const { data: userData, isLoading: userLoading, error: userError } = useQuery<{user: any}>({
     queryKey: ["/api/auth/me"],
   });
 
-  const { data: accountsData, isLoading: accountsLoading } = useQuery<{accounts: any[]}>({
+  const { data: accountsData, isLoading: accountsLoading, error: accountsError } = useQuery<{accounts: any[]}>({
     queryKey: ["/api/accounts"],
   });
+
+  useEffect(() => {
+    if (userError || accountsError) {
+      const error = userError || accountsError;
+      if (error && error.message && error.message.includes('401')) {
+        toast({
+          title: "Session expired",
+          description: "Please log in again to continue.",
+          variant: "destructive",
+        });
+        setLocation("/login");
+      }
+    }
+  }, [userError, accountsError, setLocation, toast]);
 
   const handleLogout = async () => {
     await apiRequest("POST", "/api/auth/logout", {});
