@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CreditCard, User, LogOut, DollarSign, TrendingUp } from "lucide-react";
+import { ArrowRight, CreditCard, User, LogOut, DollarSign, TrendingUp, ArrowRightLeft } from "lucide-react";
 import { useLocation } from "wouter";
 import { formatAUD } from "@/lib/currency";
 import { apiRequest } from "@/lib/queryClient";
@@ -48,6 +48,7 @@ export default function Dashboard() {
               <nav className="hidden md:flex gap-6 text-sm">
                 <a href="/dashboard" className="hover:underline font-medium" data-testid="link-dashboard">Dashboard</a>
                 <a href="/accounts" className="hover:underline" data-testid="link-accounts">Accounts</a>
+                <a href="/transfers" className="hover:underline" data-testid="link-transfers">Transfers</a>
                 <a href="/cards" className="hover:underline" data-testid="link-cards">Cards</a>
                 <a href="/profile" className="hover:underline" data-testid="link-profile">Profile</a>
               </nav>
@@ -97,6 +98,14 @@ export default function Dashboard() {
               <CardTitle className="text-lg">Quick Actions</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
+              <Button 
+                className="w-full justify-start bg-[#DA1710] hover:bg-[#B8140E] text-white" 
+                onClick={() => setLocation("/transfers")} 
+                data-testid="button-transfer-money"
+              >
+                <ArrowRightLeft className="h-4 w-4 mr-2" />
+                Transfer Money
+              </Button>
               <Button variant="outline" className="w-full justify-start" onClick={() => setLocation("/accounts")} data-testid="button-view-accounts">
                 <DollarSign className="h-4 w-4 mr-2" />
                 View Accounts

@@ -9,7 +9,9 @@ import { setupVite, serveStatic, log } from "./vite";
 const app = express();
 
 // Trust proxy for Replit environment - CRITICAL for HTTPS detection
-app.set('trust proxy', 1);
+// Set to 2 to trust exactly 2 proxy hops (Cloudflare → Replit) for custom domain
+// This prevents header spoofing while enabling secure cookies on custom domains
+app.set('trust proxy', 2);
 
 // CORS configuration - CRITICAL for cross-browser/incognito login
 // Allow both Replit domain and custom domain
