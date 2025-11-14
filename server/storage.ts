@@ -1,7 +1,7 @@
 import { db } from "../db/index";
 import { users, accounts, transactions, debitCards, admins, payees, transfers } from "@shared/schema";
 import type { User, InsertUser, Account, InsertAccount, Transaction, InsertTransaction, DebitCard, InsertDebitCard, Admin, InsertAdmin, Payee, InsertPayee, Transfer, InsertTransfer } from "@shared/schema";
-import { eq, desc, and, gte, or } from "drizzle-orm";
+import { eq, desc, and, gte, or, inArray } from "drizzle-orm";
 
 export interface IStorage {
   getUserByEmail(email: string): Promise<User | undefined>;
@@ -271,6 +271,20 @@ export class DatabaseStorage implements IStorage {
       const fromAcc = firstLockedAccount.id === params.fromAccountId ? firstLockedAccount : secondLockedAccount;
       const toAcc = firstLockedAccount.id === params.toAccountId ? firstLockedAccount : secondLockedAccount;
 
+      // Fetch user information for both accounts
+      const userIds = [fromAcc.userId, toAcc.userId];
+      const accountUsers = await tx
+        .select()
+        .from(users)
+        .where(inArray(users.id, userIds));
+      
+      const fromUser = accountUsers.find(u => u.id === fromAcc.userId);
+      const toUser = accountUsers.find(u => u.id === toAcc.userId);
+
+      if (!fromUser || !toUser) {
+        throw new Error("User not found");
+      }
+
       const transferAmount = parseFloat(params.amount);
       const fromBalance = parseFloat(fromAcc.balance);
       const toBalance = parseFloat(toAcc.balance);
@@ -297,6 +311,10 @@ export class DatabaseStorage implements IStorage {
         category: "Transfer",
         balanceAfter: newFromBalanceStr,
         transactionDate: new Date(),
+        senderName: fromUser.fullName,
+        senderAccountNumber: fromAcc.accountNumber,
+        receiverName: toUser.fullName,
+        receiverAccountNumber: toAcc.accountNumber,
       });
 
       await tx.update(accounts)
@@ -312,6 +330,10 @@ export class DatabaseStorage implements IStorage {
         category: "Transfer",
         balanceAfter: newToBalanceStr,
         transactionDate: new Date(),
+        senderName: fromUser.fullName,
+        senderAccountNumber: fromAcc.accountNumber,
+        receiverName: toUser.fullName,
+        receiverAccountNumber: toAcc.accountNumber,
       });
 
       const [transfer] = await tx.insert(transfers).values({

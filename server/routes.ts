@@ -423,6 +423,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
           return res.status(400).json({ error: "Account number and BSB are required for external transfers" });
         }
 
+        // Fetch user information for sender details
+        const user = await storage.getUserById(req.session.userId);
+        if (!user) {
+          return res.status(404).json({ error: "User not found" });
+        }
+
         const newFromBalance = (currentBalance - transferAmount).toFixed(2);
         await storage.updateAccountBalance(fromAccount.id, newFromBalance);
 
@@ -435,6 +441,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
           category: "Transfer",
           balanceAfter: newFromBalance,
           transactionDate: new Date(),
+          senderName: user.fullName,
+          senderAccountNumber: fromAccount.accountNumber,
+          receiverName: result.data.beneficiaryName || null,
+          receiverAccountNumber: result.data.toAccountNumber,
         });
 
         const transfer = await storage.createTransfer({
