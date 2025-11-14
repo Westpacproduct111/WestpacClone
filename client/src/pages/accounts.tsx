@@ -20,22 +20,17 @@ export default function Accounts() {
     queryKey: ["/api/accounts"],
   });
 
+  const checkingAccount = accountsData?.accounts?.find(a => a.accountType === "Checking");
+  const savingsAccount = accountsData?.accounts?.find(a => a.accountType === "Savings");
+
   const { data: checkingTransactions } = useQuery<{transactions: any[]}>({
-    queryKey: ["/api/accounts", accountsData?.accounts?.[0]?.id, "transactions"],
-    queryFn: () => {
-      const checkingAccount = accountsData?.accounts?.find(a => a.accountType === "Checking");
-      return checkingAccount ? fetch(`/api/accounts/${checkingAccount.id}/transactions`).then(r => r.json()) : null;
-    },
-    enabled: !!accountsData?.accounts,
+    queryKey: checkingAccount ? ['/api/accounts', checkingAccount.id, 'transactions'] : [],
+    enabled: !!checkingAccount?.id,
   });
 
   const { data: savingsTransactions } = useQuery<{transactions: any[]}>({
-    queryKey: ["/api/accounts", accountsData?.accounts?.[1]?.id, "transactions"],
-    queryFn: () => {
-      const savingsAccount = accountsData?.accounts?.find(a => a.accountType === "Savings");
-      return savingsAccount ? fetch(`/api/accounts/${savingsAccount.id}/transactions`).then(r => r.json()) : null;
-    },
-    enabled: !!accountsData?.accounts,
+    queryKey: savingsAccount ? ['/api/accounts', savingsAccount.id, 'transactions'] : [],
+    enabled: !!savingsAccount?.id,
   });
 
   const handleLogout = async () => {
@@ -53,10 +48,6 @@ export default function Accounts() {
       </div>
     );
   }
-
-  const accounts = accountsData?.accounts || [];
-  const checkingAccount = accounts.find(a => a.accountType === "Checking");
-  const savingsAccount = accounts.find(a => a.accountType === "Savings");
 
   return (
     <div className="min-h-screen bg-background">
