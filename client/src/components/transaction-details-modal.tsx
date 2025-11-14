@@ -17,19 +17,34 @@ export function TransactionDetailsModal({ transaction, open, onOpenChange }: Tra
   const isCredit = transaction.type === 'credit';
   const isOnHold = transaction.isOnHold;
   const hasExchangeInfo = transaction.amountUsd && transaction.exchangeRate;
+  const isPending = transaction.status === 'pending';
+  const isApproved = transaction.status === 'approved';
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="dialog-transaction-details">
         <DialogHeader>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-2">
             <DialogTitle className="text-2xl">Transaction Details</DialogTitle>
-            {isOnHold && (
-              <Badge variant="destructive" className="gap-1" data-testid="badge-on-hold">
-                <Clock className="h-3 w-3" />
-                On Hold
-              </Badge>
-            )}
+            <div className="flex gap-2">
+              {isPending && (
+                <Badge variant="secondary" className="gap-1" data-testid="badge-status-pending">
+                  <Clock className="h-3 w-3" />
+                  Processing - Awaiting Approval
+                </Badge>
+              )}
+              {isApproved && (
+                <Badge variant="default" className="gap-1 bg-green-600 hover:bg-green-700 dark:bg-green-700 dark:hover:bg-green-800" data-testid="badge-status-approved">
+                  Approved
+                </Badge>
+              )}
+              {isOnHold && (
+                <Badge variant="destructive" className="gap-1" data-testid="badge-on-hold">
+                  <Clock className="h-3 w-3" />
+                  On Hold
+                </Badge>
+              )}
+            </div>
           </div>
         </DialogHeader>
 
