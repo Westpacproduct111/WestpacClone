@@ -93,6 +93,7 @@ export const transfers = pgTable("transfers", {
   toAccountId: varchar("to_account_id").references(() => accounts.id, { onDelete: "cascade" }),
   toAccountNumber: text("to_account_number"),
   toBsb: text("to_bsb"),
+  beneficiaryName: text("beneficiary_name"),
   amount: decimal("amount", { precision: 15, scale: 2 }).notNull(),
   description: text("description").notNull(),
   status: text("status").notNull().default('completed'),
@@ -144,6 +145,7 @@ export const transferFundsSchema = z.object({
   toAccountId: z.string().optional(),
   toAccountNumber: z.string().optional(),
   toBsb: z.string().optional(),
+  beneficiaryName: z.string().optional(),
   amount: z.string().min(1, "Amount is required").refine((val) => parseFloat(val) > 0, "Amount must be greater than 0"),
   description: z.string().min(1, "Description is required"),
   transferType: z.enum(['internal', 'external']),
@@ -152,11 +154,11 @@ export const transferFundsSchema = z.object({
     return data.toAccountId && data.toAccountId.length > 0;
   }
   if (data.transferType === 'external') {
-    return data.toAccountNumber && data.toAccountNumber.length > 0 && data.toBsb && data.toBsb.length > 0;
+    return data.toAccountNumber && data.toAccountNumber.length > 0 && data.toBsb && data.toBsb.length > 0 && data.beneficiaryName && data.beneficiaryName.length > 0;
   }
   return true;
 }, {
-  message: "For internal transfers, destination account is required. For external transfers, account number and BSB are required.",
+  message: "For internal transfers, destination account is required. For external transfers, account number, BSB, and beneficiary name are required.",
   path: ["toAccountId"],
 });
 

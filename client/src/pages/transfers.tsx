@@ -13,12 +13,14 @@ import { apiRequest, queryClient } from "@/lib/queryClient";
 import { formatAUD } from "@/lib/currency";
 import { ArrowRight, ArrowUpDown } from "lucide-react";
 import { useLocation } from "wouter";
+import { TransferReceipt } from "@/components/transfer-receipt";
 
 const transferSchema = z.object({
   fromAccountId: z.string().min(1, "Please select an account"),
   toAccountId: z.string().optional(),
   toAccountNumber: z.string().optional(),
   toBsb: z.string().optional(),
+  beneficiaryName: z.string().optional(),
   amount: z.string().min(1, "Amount is required"),
   description: z.string().min(1, "Description is required"),
   transferType: z.enum(['internal', 'external']),
@@ -30,6 +32,7 @@ export default function Transfers() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [transferType, setTransferType] = useState<'internal' | 'external'>('internal');
+  const [completedTransfer, setCompletedTransfer] = useState<any>(null);
 
   const { data: accountsData } = useQuery<{accounts: any[]}>({
     queryKey: ["/api/accounts"],
@@ -39,6 +42,10 @@ export default function Transfers() {
     queryKey: ["/api/transfers"],
   });
 
+  const { data: userData } = useQuery<{user: any}>({
+    queryKey: ["/api/auth/me"],
+  });
+
   const form = useForm<TransferForm>({
     resolver: zodResolver(transferSchema),
     defaultValues: {
@@ -46,6 +53,7 @@ export default function Transfers() {
       toAccountId: "",
       toAccountNumber: "",
       toBsb: "",
+      beneficiaryName: "",
       amount: "",
       description: "",
       transferType: 'internal',
@@ -54,14 +62,19 @@ export default function Transfers() {
 
   const transferMutation = useMutation({
     mutationFn: (data: TransferForm) => apiRequest("POST", "/api/transfers", data),
-    onSuccess: () => {
-      toast({
-        title: "Transfer Successful",
-        description: "Your transfer has been completed.",
-      });
-      form.reset();
+    onSuccess: (response: any) => {
       queryClient.invalidateQueries({ queryKey: ["/api/accounts"] });
       queryClient.invalidateQueries({ queryKey: ["/api/transfers"] });
+      
+      if (response.transfer && accounts.length > 0 && user) {
+        setCompletedTransfer(response.transfer);
+      } else {
+        toast({
+          title: "Transfer Successful",
+          description: "Your transfer has been completed.",
+        });
+      }
+      form.reset();
     },
     onError: (error: any) => {
       toast({
@@ -74,13 +87,28 @@ export default function Transfers() {
 
   const accounts = accountsData?.accounts || [];
   const transfers = transfersData?.transfers || [];
+  const user = userData?.user;
 
   const onSubmit = (data: TransferForm) => {
     transferMutation.mutate({ ...data, transferType });
   };
 
+  const fromAccount = accounts.find(acc => acc.id === completedTransfer?.fromAccountId);
+  const toAccount = completedTransfer?.toAccountId 
+    ? accounts.find(acc => acc.id === completedTransfer.toAccountId)
+    : undefined;
+
   return (
     <div className="min-h-screen bg-background">
+      {completedTransfer && fromAccount && user && (
+        <TransferReceipt
+          transfer={completedTransfer}
+          fromAccount={fromAccount}
+          toAccount={toAccount}
+          userFullName={user.fullName}
+          onClose={() => setCompletedTransfer(null)}
+        />
+      )}
       <header className="bg-[#DA1710] text-white sticky top-0 z-50">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -196,6 +224,19 @@ export default function Transfers() {
                     />
                   ) : (
                     <>
+                      <FormField
+                        control={form.control}
+                        name="beneficiaryName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Recipient Name</FormLabel>
+                            <FormControl>
+                              <Input {...field} placeholder="Full name of recipient" data-testid="input-beneficiary-name" />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                       <FormField
                         control={form.control}
                         name="toBsb"

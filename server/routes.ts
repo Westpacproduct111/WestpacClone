@@ -442,6 +442,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           toAccountId: null,
           toAccountNumber: result.data.toAccountNumber,
           toBsb: result.data.toBsb,
+          beneficiaryName: result.data.beneficiaryName || null,
           amount: result.data.amount,
           description: result.data.description,
           status: "completed",
