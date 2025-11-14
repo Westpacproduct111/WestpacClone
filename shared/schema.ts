@@ -45,6 +45,7 @@ export const transactions = pgTable("transactions", {
   balanceAfter: decimal("balance_after", { precision: 15, scale: 2 }).notNull(),
   transactionDate: timestamp("transaction_date").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  status: text("status").notNull().default('pending'),
   isOnHold: text("is_on_hold").default('false').notNull(),
   holdReason: text("hold_reason"),
   senderName: text("sender_name"),
@@ -96,7 +97,7 @@ export const transfers = pgTable("transfers", {
   beneficiaryName: text("beneficiary_name"),
   amount: decimal("amount", { precision: 15, scale: 2 }).notNull(),
   description: text("description").notNull(),
-  status: text("status").notNull().default('completed'),
+  status: text("status").notNull().default('pending'),
   transferType: text("transfer_type").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
