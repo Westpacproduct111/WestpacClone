@@ -132,6 +132,12 @@ export default function Accounts() {
                           <div className="flex-1 min-w-0">
                             <div className="font-medium flex items-center gap-2">
                               <span className="truncate">{transaction.description}</span>
+                              {transaction.status === 'pending' && (
+                                <Badge variant="outline" className="text-xs gap-1 bg-blue-50 text-blue-700 border-blue-300 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800">
+                                  <Clock className="h-3 w-3" />
+                                  Pending
+                                </Badge>
+                              )}
                               {transaction.isOnHold && (
                                 <Badge variant="outline" className="text-xs gap-1 bg-yellow-50 text-yellow-700 border-yellow-300 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800">
                                   <Clock className="h-3 w-3" />
@@ -196,6 +202,12 @@ export default function Accounts() {
                           <div className="flex-1 min-w-0">
                             <div className="font-medium flex items-center gap-2">
                               <span className="truncate">{transaction.description}</span>
+                              {transaction.status === 'pending' && (
+                                <Badge variant="outline" className="text-xs gap-1 bg-blue-50 text-blue-700 border-blue-300 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-800">
+                                  <Clock className="h-3 w-3" />
+                                  Pending
+                                </Badge>
+                              )}
                               {transaction.isOnHold && (
                                 <Badge variant="outline" className="text-xs gap-1 bg-yellow-50 text-yellow-700 border-yellow-300 dark:bg-yellow-900/20 dark:text-yellow-400 dark:border-yellow-800">
                                   <Clock className="h-3 w-3" />
